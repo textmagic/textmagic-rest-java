@@ -1,0 +1,18 @@
+{
+  "page": 1,
+  "limit": 10,
+  "pageCount": 1,
+  "resources": [
+    {
+      "id": 1,
+      "direction": "o",
+      "sender": "1234567890",
+      "messageTime": "2014-08-13T05:05:51+0000",
+      "text": "TEST",
+      "receiver": "1234567890",
+      "status": "f",
+      "firstName": "",
+      "lastName": ""
+    }
+  ]
+}

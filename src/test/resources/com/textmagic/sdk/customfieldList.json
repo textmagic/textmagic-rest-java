@@ -1,0 +1,12 @@
+{
+  "page": 1,
+  "limit": 10,
+  "pageCount": 1,
+  "resources": [
+    {
+      "id": 1,
+      "name": "TEST",
+      "createdAt": "2007-12-27T13:04:20+0000"
+    }
+  ]
+}

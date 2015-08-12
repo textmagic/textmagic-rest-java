@@ -1,0 +1,14 @@
+{
+  "id": 1,
+  "nextSend": "2015-07-21T03:56:26+0000",
+  "session": {
+    "id": 1,
+    "startTime": "2015-08-04T13:09:49+0000",
+    "text": "TEST",
+    "source": "A",
+    "referenceId": "A_test_61a96ffcb251bb9bf0abf8fec19d0ea8_109944233955c0b99d916164.59609305",
+    "price": 0.5,
+    "numbersCount": 1
+  },
+  "rrule": null
+}

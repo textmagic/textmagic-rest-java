@@ -1,0 +1,14 @@
+{
+  "page": 1,
+  "limit": 10,
+  "pageCount": 1,
+  "resources": [
+    {
+      "id": 1,
+      "name": "TEST",
+      "description": "TEST",
+      "membersCount": 1,
+      "shared": false
+    }
+  ]
+}

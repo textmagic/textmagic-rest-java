@@ -1,0 +1,15 @@
+[
+  {
+    "replyRate": 0.5,
+    "date": null,
+    "deliveryRate": 0.5,
+    "costs": 0.5,
+    "messagesReceived": 1,
+    "messagesSentDelivered": 1,
+    "messagesSentAccepted": 1,
+    "messagesSentBuffered": 1,
+    "messagesSentFailed": 1,
+    "messagesSentRejected": 1,
+    "messagesSentParts": 1
+  }
+]

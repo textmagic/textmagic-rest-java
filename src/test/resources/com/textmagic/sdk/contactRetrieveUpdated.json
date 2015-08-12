@@ -1,0 +1,20 @@
+{
+  "id": 1,
+  "firstName": "TEST1",
+  "lastName": "TEST1",
+  "companyName": "TEST1",
+  "phone": "1234567890",
+  "email": "TEST1",
+  "country": {
+    "id": "GB",
+    "name": "Great Britain"
+  },
+  "customFields": [
+    {
+      "value": "TEST",
+      "id": 1,
+      "name": "TEST",
+      "createdAt": null
+    }
+  ]
+}

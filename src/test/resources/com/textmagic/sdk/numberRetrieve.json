@@ -1,0 +1,32 @@
+{
+  "id": 1,
+  "user": {
+    "id": 1,
+    "username": "TEST",
+    "firstName": "TEST",
+    "lastName": "TEST",
+    "status": "A",
+    "balance": 0,
+    "company": "TEST",
+    "currency": {
+      "id": "EUR",
+      "htmlSymbol": "&euro;"
+    },
+    "timezone": {
+      "id": 1,
+      "area": "UTC",
+      "dst": 0,
+      "offset": 0,
+      "timezone": "UTC"
+    },
+    "subaccountType": "P"
+  },
+  "purchasedAt": "2014-11-26T08:10:28+0000",
+  "expireAt": "2014-12-25T08:10:28+0000",
+  "phone": "1234567890",
+  "country": {
+    "id": "GB",
+    "name": "Great Britain"
+  },
+  "status": "A"
+}

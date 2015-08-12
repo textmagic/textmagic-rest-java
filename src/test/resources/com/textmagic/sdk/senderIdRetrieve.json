@@ -1,0 +1,26 @@
+{
+  "id": 1,
+  "senderId": "TEST",
+  "user": {
+    "id": 1,
+    "username": "TEST",
+    "firstName": "TEST",
+    "lastName": "TEST",
+    "status": "A",
+    "balance": 0,
+    "company": "TEST",
+    "currency": {
+      "id": "EUR",
+      "htmlSymbol": "&euro;"
+    },
+    "timezone": {
+      "id": 1,
+      "area": "UTC",
+      "dst": 0,
+      "offset": 0,
+      "timezone": "UTC"
+    },
+    "subaccountType": "P"
+  },
+  "status": "A"
+}

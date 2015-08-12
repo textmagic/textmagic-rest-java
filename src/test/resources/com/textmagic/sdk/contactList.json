@@ -1,0 +1,27 @@
+{
+  "page": 1,
+  "limit": 10,
+  "pageCount": 1,
+  "resources": [
+    {
+      "id": 1,
+      "firstName": "TEST",
+      "lastName": "TEST",
+      "companyName": "TEST",
+      "phone": "1234567890",
+      "email": "TEST",
+      "country": {
+        "id": "GB",
+        "name": "Great Britain"
+      },
+      "customFields": [
+        {
+          "value": "TEST",
+          "id": 1,
+          "name": "TEST",
+          "createdAt": null
+        }
+      ]
+    }
+  ]
+}

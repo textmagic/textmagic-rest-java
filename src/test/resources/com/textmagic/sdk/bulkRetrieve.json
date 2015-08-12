@@ -1,0 +1,17 @@
+{
+  "id": 1,
+  "status": "c",
+  "itemsProcessed": 10000,
+  "itemsTotal": 10000,
+  "createdAt": "2014-12-14T04:34:46+0000",
+  "session": {
+    "id": 1,
+    "startTime": "2014-12-14T04:34:53+0000",
+    "text": "test",
+    "source": "O",
+    "referenceId": "O_test_098f6bcd4621d373cade4e832627b4f6_1414151612548d136b600eb4.33276307",
+    "price": 100.0,
+    "numbersCount": 10000
+  },
+  "text": "test"
+}

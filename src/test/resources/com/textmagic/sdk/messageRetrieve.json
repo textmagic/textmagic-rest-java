@@ -1,0 +1,14 @@
+{
+  "id": 1,
+  "receiver": "1234567890",
+  "messageTime": "2015-07-30T10:33:09+0000",
+  "status": "j",
+  "text": "TEST",
+  "charset": "ISO-8859-1",
+  "firstName": null,
+  "lastName": null,
+  "country": "UA",
+  "sender": "1234567890",
+  "price": 0,
+  "partsCount": 1
+}

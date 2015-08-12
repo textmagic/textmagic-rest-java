@@ -1,0 +1,14 @@
+{
+  "page": 1,
+  "limit": 10,
+  "pageCount": 1,
+  "resources": [
+    {
+      "id": 1,
+      "bundle": 1,
+      "currency": "EUR",
+      "vat": 0,
+      "paymentMethod": "TEST"
+    }
+  ]
+}
