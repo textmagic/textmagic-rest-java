@@ -72,8 +72,8 @@ public abstract class InstanceResource<C extends RestClient> extends Resource<C>
 	/**
 	 * Set resource property
 	 *
-	 * @param Property name
-	 * @param Property value
+	 * @param name Property name
+	 * @param value Property value
 	 */
 	protected void setProperty(String name, Object value) {
 		properties.put(name, value);
@@ -81,6 +81,7 @@ public abstract class InstanceResource<C extends RestClient> extends Resource<C>
     
 	/**
 	 * Retrieve resource date property
+     *
 	 * @param name Property name
 	 * @return Property value
 	 */
@@ -100,8 +101,8 @@ public abstract class InstanceResource<C extends RestClient> extends Resource<C>
 	/**
 	 * Set resource date property
 	 *
-	 * @param Property name
-	 * @param Property value
+	 * @param name Property name
+	 * @param value Property value
 	 */
     protected void setDate(String name, Date value) {
         properties.put(name, DateFormatUtils.format(value, "yyyy-MM-dd'T'HH:mm:ssZ"));
@@ -111,7 +112,8 @@ public abstract class InstanceResource<C extends RestClient> extends Resource<C>
 	 * Get resource item
 	 *
 	 * @param id Resource item id
-	 * @throws RestException
+	 * @return Error state
+	 * @throws RestException exception
 	 */
 	public boolean get(Integer id) throws RestException {
 		if (properties.size() == 0) {
@@ -126,7 +128,9 @@ public abstract class InstanceResource<C extends RestClient> extends Resource<C>
 	
 	/**
 	 * Create or update resource item
-	 * @throws RestException
+     *
+     * @return Error state
+	 * @throws RestException exception
 	 */
 	public boolean createOrUpdate() throws RestException {
 		String resourcePath = null;
@@ -149,7 +153,9 @@ public abstract class InstanceResource<C extends RestClient> extends Resource<C>
 	
 	/**
 	 * Delete resource item
-	 * @throws RestException
+     *
+     * @return Error state
+	 * @throws RestException exception
 	 */
 	public boolean delete() throws RestException {
 		if (getProperty("id") == null) {

@@ -42,7 +42,9 @@ public class TMMessagingList<T extends Resource, C extends RestClient> extends R
 
     /**
      * Retrieve messaging list
-     * @throws RestException 
+     *
+     * @return Messaging list
+     * @throws RestException exception
      */
     @SuppressWarnings("unchecked")
 	public Iterator<TMMessaging> iterator() throws RestException {

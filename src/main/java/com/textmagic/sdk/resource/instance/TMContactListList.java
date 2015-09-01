@@ -16,6 +16,7 @@ public class TMContactListList extends ListResource<TMList, RestClient> {
      * Instantiates contact list list
      *
      * @param client HTTP client
+     * @param contactId Contact id
      */
 	public TMContactListList(RestClient client, Integer contactId) {
 		super(client);

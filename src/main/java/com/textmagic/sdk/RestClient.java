@@ -87,7 +87,7 @@ public class RestClient {
 	/**
 	 * Set HTTP Client instance
 	 *
-	 * @param httpclient HTTP client
+	 * @param client HTTP client
 	 */
 	public void setHttpClient(final HttpClient client) {
 		this.client = client;
@@ -113,6 +113,7 @@ public class RestClient {
 	/**
 	 * Retrieve resource object
 	 *
+	 * @param name Name
 	 * @return Resource object
 	 */
 	public Object getResource(String name) {
@@ -143,6 +144,8 @@ public class RestClient {
 	/**
 	 * Retrieve resource object
 	 *
+	 * @param name Name
+	 * @param parameters Parameters
 	 * @return Resource object
 	 */
 	public Object getResource(String name, Map<String, String> parameters) {
@@ -293,7 +296,7 @@ public class RestClient {
 	/**
 	 * Build parameters list
 	 *
-	 * @param paramList Parameters map container
+	 * @param paramMap Parameters map container
 	 * @return Parameters list
 	 */
 	public static List<NameValuePair> buildParametersList(final Map<String, String> paramMap) {
@@ -314,7 +317,7 @@ public class RestClient {
 	 * @param path Request path
 	 * @param method Request method
 	 * @return Textmagic response instance
-     * @throws RestException
+     * @throws RestException exception
 	 */
 	public RestResponse request(final String path, final String method) throws RestException {
 		Map<String, String> param = new HashMap<String, String>();
@@ -329,7 +332,7 @@ public class RestClient {
 	 * @param method Request method
 	 * @param paramList Request params
 	 * @return Textmagic response instance
-     * @throws RestException
+     * @throws RestException exception
 	 */
 	public RestResponse request(final String path, final String method, final List<NameValuePair> paramList) throws RestException {
 		if (path == null && method == null && paramList == null) {
@@ -381,7 +384,7 @@ public class RestClient {
 	 * @param method Request method
 	 * @param paramMap Request params
 	 * @return Textmagic response instance
-     * @throws RestException
+     * @throws RestException exception
 	 */
 	public RestResponse request(final String path, final String method, final Map<String, String> paramMap) throws RestException {
 		List<NameValuePair> paramList = buildParametersList(paramMap);

@@ -66,6 +66,8 @@ public class TMTemplate extends InstanceResource<RestClient> {
     
     /**
      * Set name
+     *
+     * @param name Name
      */
     public void setName(final String name) {
         setProperty("name", name);
@@ -82,6 +84,8 @@ public class TMTemplate extends InstanceResource<RestClient> {
     
     /**
      * Set content
+     *
+     * @param content Content
      */
     public void setContent(final String content) {
         setProperty("content", content);

@@ -80,6 +80,8 @@ public class TMSenderId extends InstanceResource<RestClient> {
     
     /**
      * Set senderId
+     *
+     * @param senderId Sender id
      */
     public void setSenderId(String senderId) {
         setProperty("senderId", senderId);
@@ -106,6 +108,8 @@ public class TMSenderId extends InstanceResource<RestClient> {
     
     /**
      * Set explanation
+     *
+     * @param explanation Explanation
      */
     public void setExplanation(String explanation) {
         setProperty("explanation", explanation);

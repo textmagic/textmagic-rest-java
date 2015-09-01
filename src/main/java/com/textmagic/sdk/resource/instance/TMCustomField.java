@@ -50,7 +50,11 @@ public class TMCustomField extends InstanceResource<RestClient> {
     
     /**
 	 * Update custom field contact value
-     * @throws RestException
+     *
+     * @param contactId Contact id
+     * @param value Value
+     * @return Error state
+     * @throws RestException exception
 	 */
 	public boolean updateContactValue(final Integer contactId, final String value) throws RestException {
         if (properties.size() > 0) {
@@ -85,6 +89,8 @@ public class TMCustomField extends InstanceResource<RestClient> {
     
     /**
     * Set name
+     *
+     * @param name Name
     */
     public void setName(final String name) {
         setProperty("name", name);

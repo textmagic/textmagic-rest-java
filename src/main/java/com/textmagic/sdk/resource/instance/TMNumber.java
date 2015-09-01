@@ -65,7 +65,11 @@ public class TMNumber extends InstanceResource<RestClient> {
     
     /**
      * Retrieve available numbers
-     * @throws RestException 
+     *
+     * @param country Country
+     * @param prefix Prefix
+     * @return Available numbers
+     * @throws RestException exception
      */
     @SuppressWarnings("unchecked")
 	public List<String> getAvailableNumbers(String country, String prefix) throws RestException {
@@ -116,6 +120,8 @@ public class TMNumber extends InstanceResource<RestClient> {
     
     /**
      * Set phone
+     *
+     * @param phone Phone
      */
     public void setPhone(String phone) {
         setProperty("phone", phone);
@@ -144,6 +150,8 @@ public class TMNumber extends InstanceResource<RestClient> {
     
     /**
      * Set country
+     *
+     * @param country Country
      */
     public void setCountry(String country) {
         setProperty("country", country);
@@ -161,6 +169,8 @@ public class TMNumber extends InstanceResource<RestClient> {
     
     /**
      * Set userId
+     *
+     * @param userId User id
      */
     public void setUserId(Integer userId) {
         setProperty("userId", userId);

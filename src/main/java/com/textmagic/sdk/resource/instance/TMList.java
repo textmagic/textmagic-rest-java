@@ -70,6 +70,8 @@ public class TMList extends InstanceResource<RestClient> {
     
     /**
      * Set name
+     *
+     * @param name Name
      */
     public void setName(final String name) {
         setProperty("name", name);
@@ -104,6 +106,8 @@ public class TMList extends InstanceResource<RestClient> {
     
     /**
      * Set shared
+     *
+     * @param shared Shared
      */
     public void setShared(final Boolean shared) {
         setProperty("shared", shared);
@@ -112,6 +116,7 @@ public class TMList extends InstanceResource<RestClient> {
     /**
      * Retrieve list contacts iterator
      *
+     * @return Contacts
      */
     public Iterator<TMContact> getContactsIterator() {
     	if (properties.size() > 0) {
@@ -124,7 +129,10 @@ public class TMList extends InstanceResource<RestClient> {
     
     /**
 	 * Add contacts to list
-     * @throws RestException
+     *
+     * @param contacts Contacts
+     * @return Error state
+     * @throws RestException exception
 	 */
 	public boolean addContactsToList(final List<Integer> contacts) throws RestException {
         if (properties.size() > 0) {
@@ -144,7 +152,10 @@ public class TMList extends InstanceResource<RestClient> {
     
     /**
 	 * Remove contacts from list
-     * @throws RestException
+     *
+     * @param contacts Contacts
+     * @return Error state
+     * @throws RestException exception
 	 */
 	public boolean removeContactsFromList(final List<Integer> contacts) throws RestException {
         if (properties.size() > 0) {

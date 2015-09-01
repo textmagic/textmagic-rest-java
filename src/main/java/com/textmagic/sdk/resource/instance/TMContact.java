@@ -69,6 +69,8 @@ public class TMContact extends InstanceResource<RestClient> {
     
     /**
      * Set first name
+     *
+     * @param firstName First name
      */
     public void setFirstName(final String firstName) {
         setProperty("firstName", firstName);
@@ -85,6 +87,8 @@ public class TMContact extends InstanceResource<RestClient> {
     
     /**
      * Set last name
+     *
+     * @param lastName Last name
      */
     public void setLastName(final String lastName) {
         setProperty("lastName", lastName);
@@ -101,6 +105,8 @@ public class TMContact extends InstanceResource<RestClient> {
     
     /**
      * Set phone
+     *
+     * @param phone Phone
      */
     public void setPhone(final String phone) {
         setProperty("phone", phone);
@@ -117,6 +123,8 @@ public class TMContact extends InstanceResource<RestClient> {
     
     /**
      * Set email
+     *
+     * @param email Email
      */
     public void setEmail(final String email) {
         setProperty("email", email);
@@ -133,6 +141,8 @@ public class TMContact extends InstanceResource<RestClient> {
     
     /**
      * Set company name
+     *
+     * @param companyName Company name
      */
     public void setCompanyName(final String companyName) {
         setProperty("companyName", companyName);
@@ -140,6 +150,8 @@ public class TMContact extends InstanceResource<RestClient> {
         
     /**
      * Set lists
+     *
+     * @param lists Lists
      */
 	public void setLists(final List<Integer> lists) {
 		List<String> param = new ArrayList<String>();
@@ -152,6 +164,8 @@ public class TMContact extends InstanceResource<RestClient> {
 	
     /**
      * Retrieve contact custom fields
+     *
+     * @return Contact custom fields
      */
     @SuppressWarnings("unchecked")
 	public Iterator<TMCustomField> getCustomFieldsIterator() {
@@ -169,6 +183,8 @@ public class TMContact extends InstanceResource<RestClient> {
     
     /**
      * Retrieve contact lists
+     *
+     * @return Contact lists
      */
     public Iterator<TMList> getListsIterator() {
     	if (properties.size() > 0) {

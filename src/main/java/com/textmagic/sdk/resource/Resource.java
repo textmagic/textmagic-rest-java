@@ -29,7 +29,7 @@ public abstract class Resource<C extends RestClient> {
 	/**
 	 * Instantiates resource
 	 *
-	 * @param HTTP client
+	 * @param client HTTP client
 	 */
 	public Resource(C client) {
 		this.client = client;
@@ -93,7 +93,7 @@ public abstract class Resource<C extends RestClient> {
     /**
 	 * Build request parameters list
 	 *
-	 * @param paramList Parameters map container
+	 * @param paramMap Parameters map container
 	 * @return Parameters list
 	 */
 	protected List<NameValuePair> buildRequestParameters(final Map<String, Object> paramMap) {

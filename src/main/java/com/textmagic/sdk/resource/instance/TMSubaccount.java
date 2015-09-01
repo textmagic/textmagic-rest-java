@@ -82,6 +82,8 @@ public class TMSubaccount extends TMUser {
     
     /**
      * Set email
+     *
+     * @param email Email
      */
     public void setEmail(final String email) {
         setProperty("email", email);
@@ -89,6 +91,8 @@ public class TMSubaccount extends TMUser {
     
     /**
      * Set role
+     *
+     * @param role Role
      */
     public void setRole(final String role) {
         setProperty("role", role);

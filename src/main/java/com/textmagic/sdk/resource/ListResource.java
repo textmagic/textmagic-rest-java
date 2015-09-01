@@ -88,8 +88,6 @@ public abstract class ListResource<T extends Resource, C extends RestClient> ext
 
 	/**
 	 * Iterator
-	 *
-	 * @param client HTTP client
 	 */
     public Iterator<T> iterator() {
 		try {
@@ -111,7 +109,7 @@ public abstract class ListResource<T extends Resource, C extends RestClient> ext
 	/**
 	 * Get items list of resource
 	 *
-	 * @throws RestException
+	 * @throws RestException exception
 	 */
     @SuppressWarnings("unchecked")
 	protected void getListContent() throws RestException {
@@ -143,7 +141,7 @@ public abstract class ListResource<T extends Resource, C extends RestClient> ext
 	/**
 	 * Fetch next page
 	 *
-     * @throws RestException
+     * @throws RestException exception
 	 */
 	protected void fetchNextPage() throws RestException {
 	    page++;
@@ -154,7 +152,7 @@ public abstract class ListResource<T extends Resource, C extends RestClient> ext
 	 * Get page data
 	 *
 	 * @return Page data
-	 * @throws RestException
+	 * @throws RestException exception
 	 */
 	public List<T> getPageData() throws RestException {
 		if (pageData == null) {

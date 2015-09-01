@@ -86,6 +86,8 @@ public class TMUnsubscriber extends InstanceResource<RestClient> {
     
     /**
      * Set phone
+     *
+     * @param phone Phone
      */
     public void setPhone(String phone) {
         setProperty("phone", phone);

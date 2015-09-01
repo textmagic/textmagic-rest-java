@@ -16,6 +16,7 @@ public class TMChatMessageList extends ListResource<TMChatMessage, RestClient> {
      * Instantiates chat message list
      *
      * @param client HTTP client
+     * @param phone Phone
      */
 	public TMChatMessageList(RestClient client, String phone) {
 		super(client);

@@ -43,7 +43,8 @@ public class TMNewMessage extends Resource<RestClient> {
 	/**
 	 * Send new message
 	 *
-	 * @throws RestException
+     * @return Error state
+	 * @throws RestException exception
 	 */
 	public boolean send() throws RestException {
         properties.put("dummy", false);
@@ -56,7 +57,7 @@ public class TMNewMessage extends Resource<RestClient> {
 	 * Get message price
 	 *
 	 * @return Message price
-	 * @throws RestException
+	 * @throws RestException exception
 	 */
 	public Double getPrice() throws RestException {
         properties.put("dummy", true);
@@ -78,8 +79,8 @@ public class TMNewMessage extends Resource<RestClient> {
     /**
 	 * Set resource property
 	 *
-	 * @param Property name
-	 * @param Property value
+	 * @param name Property name
+	 * @param value Property value
 	 */
 	private void setProperty(String name, Object value) {
 		properties.put(name, value);
@@ -105,6 +106,8 @@ public class TMNewMessage extends Resource<RestClient> {
 	
     /**
      * Set text
+     *
+     * @param text Text
      */
     public void setText(String text) {
         setProperty("text", text);
@@ -112,6 +115,8 @@ public class TMNewMessage extends Resource<RestClient> {
     
     /**
      * Set templateId
+     *
+     * @param templateId Template id
      */
     public void setTemplateId(Integer templateId) {
         setProperty("templateId", templateId);
@@ -119,6 +124,8 @@ public class TMNewMessage extends Resource<RestClient> {
     
     /**
      * Set sendingTime
+     *
+     * @param sendingTime Sending time
      */
     public void setSendingTime(Date sendingTime) {
         long timestamp = (sendingTime.getTime() / 1000);
@@ -127,6 +134,8 @@ public class TMNewMessage extends Resource<RestClient> {
     
     /**
      * Set contacts
+     *
+     * @param contacts Contacts
      */
     public void setContacts(final List<Integer> contacts) {
         List<String> param = new ArrayList<String>();
@@ -139,6 +148,8 @@ public class TMNewMessage extends Resource<RestClient> {
     
     /**
      * Set lists
+     *
+     * @param lists Lists
      */
     public void setLists(final List<Integer> lists) {
         List<String> param = new ArrayList<String>();
@@ -151,6 +162,8 @@ public class TMNewMessage extends Resource<RestClient> {
     
     /**
      * Set phones
+     *
+     * @param phones Phones
      */
     public void setPhones(final List<String> phones) {
         setProperty("phones", String.join(",", phones));
@@ -158,6 +171,8 @@ public class TMNewMessage extends Resource<RestClient> {
     
     /**
      * Set cutExtra
+     *
+     * @param cutExtra Extra cut
      */
     public void setCutExtra(Boolean cutExtra) {
         setProperty("cutExtra", cutExtra);
@@ -165,6 +180,8 @@ public class TMNewMessage extends Resource<RestClient> {
     
     /**
      * Set partsCount
+     *
+     * @param partsCount Parts count
      */
     public void setPartsCount(Integer partsCount) {
         setProperty("partsCount", partsCount);
@@ -172,6 +189,8 @@ public class TMNewMessage extends Resource<RestClient> {
     
     /**
      * Set referenceId
+     *
+     * @param referenceId Reference id
      */
     public void setReferenceId(String referenceId) {
         setProperty("referenceId", referenceId);
@@ -179,6 +198,8 @@ public class TMNewMessage extends Resource<RestClient> {
     
     /**
      * Set from
+     *
+     * @param from From
      */
     public void setFrom(String from) {
         setProperty("from", from);
@@ -186,6 +207,8 @@ public class TMNewMessage extends Resource<RestClient> {
     
     /**
      * Set rrule
+     *
+     * @param rrule Rrule
      */
     public void setRrule(String rrule) {
         setProperty("rrule", rrule);

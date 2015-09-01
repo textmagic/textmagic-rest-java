@@ -39,7 +39,9 @@ public class TMSourceList<T extends Resource, C extends RestClient> extends Reso
 
     /**
      * Retrieve dedicated numbers
-     * @throws RestException 
+     *
+     * @return Dedicated numbers
+     * @throws RestException exception
      */
     @SuppressWarnings("unchecked")
 	public List<String> getDedicatedNumbers() throws RestException {
@@ -51,7 +53,9 @@ public class TMSourceList<T extends Resource, C extends RestClient> extends Reso
     
     /**
      * Retrieve user phones
-     * @throws RestException 
+     *
+     * @return User phones
+     * @throws RestException exception
      */
     @SuppressWarnings("unchecked")
 	public List<String> getUserPhones() throws RestException {
@@ -63,7 +67,9 @@ public class TMSourceList<T extends Resource, C extends RestClient> extends Reso
     
     /**
      * Retrieve shared numbers
-     * @throws RestException 
+     *
+     * @return Shared numbers
+     * @throws RestException exception
      */
     @SuppressWarnings("unchecked")
 	public List<String> getSharedNumbers() throws RestException {
@@ -75,7 +81,9 @@ public class TMSourceList<T extends Resource, C extends RestClient> extends Reso
     
     /**
      * Retrieve numbers
-     * @throws RestException 
+     *
+     * @return numbers
+     * @throws RestException exception
      */
     @SuppressWarnings("unchecked")
 	public List<String> getSenderIds() throws RestException {

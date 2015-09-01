@@ -96,6 +96,8 @@ public class TMChat extends InstanceResource<RestClient> {
     
     /**
      * Retrieve chat messages
+     *
+     * @return Chat messages
      */
     public Iterator<TMChatMessage> getMessagesIterator() {
     	return new TMChatMessageList(getClient(), getPhone()).iterator();

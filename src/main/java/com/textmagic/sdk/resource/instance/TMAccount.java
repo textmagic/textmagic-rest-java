@@ -40,7 +40,8 @@ public class TMAccount extends Resource<RestClient> {
 	/**
 	 * Get account
 	 *
-	 * @throws RestException
+	 * @return Error state
+	 * @throws RestException exception
 	 */
 	public boolean get() throws RestException {
 		RestResponse response = getClient().request(getResourcePath(), "GET");
@@ -51,7 +52,8 @@ public class TMAccount extends Resource<RestClient> {
 	/**
 	 * Update account
 	 *
-	 * @throws RestException
+	 * @return Error state
+	 * @throws RestException exception
 	 */
 	public boolean update() throws RestException {
 		getClient().request(getResourcePath(), "PUT", buildRequestParameters(properties));
@@ -72,8 +74,8 @@ public class TMAccount extends Resource<RestClient> {
     /**
 	 * Set resource property
 	 *
-	 * @param Property name
-	 * @param Property value
+	 * @param name Property name
+	 * @param value Property value
 	 */
 	private void setProperty(String name, Object value) {
 		properties.put(name, value);
@@ -108,6 +110,8 @@ public class TMAccount extends Resource<RestClient> {
     
     /**
      * Set firstName
+     *
+     * @param firstName First name
      */
     public void setFirstName(String firstName) {
         setProperty("firstName", firstName);
@@ -124,6 +128,8 @@ public class TMAccount extends Resource<RestClient> {
     
     /**
      * Set lastName
+     *
+     * @param lastName Last name
      */
     public void setLastName(String lastName) {
         setProperty("lastName", lastName);
@@ -140,6 +146,8 @@ public class TMAccount extends Resource<RestClient> {
 
     /**
      * Set company
+     *
+     * @param company Company
      */
     public void setCompany(String company) {
         setProperty("company", company);
