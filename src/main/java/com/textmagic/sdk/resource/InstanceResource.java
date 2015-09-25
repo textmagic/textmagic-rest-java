@@ -1,10 +1,16 @@
 package com.textmagic.sdk.resource;
 
+import com.textmagic.sdk.RequestMethod;
 import com.textmagic.sdk.RestClient;
 import com.textmagic.sdk.RestException;
 import com.textmagic.sdk.RestResponse;
 import org.apache.commons.lang.time.DateUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
+
+import static com.textmagic.sdk.RequestMethod.DELETE;
+import static com.textmagic.sdk.RequestMethod.GET;
+import static com.textmagic.sdk.RequestMethod.POST;
+import static com.textmagic.sdk.RequestMethod.PUT;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -117,7 +123,7 @@ public abstract class InstanceResource<C extends RestClient> extends Resource<C>
 	 */
 	public boolean get(Integer id) throws RestException {
 		if (properties.size() == 0) {
-            RestResponse response = getClient().request(getResourcePath() + '/' + id, "GET");
+            RestResponse response = getClient().request(getResourcePath() + '/' + id, GET);
             this.properties = new HashMap<String, Object>(response.toMap());
             
             return !response.isError();
@@ -134,13 +140,13 @@ public abstract class InstanceResource<C extends RestClient> extends Resource<C>
 	 */
 	public boolean createOrUpdate() throws RestException {
 		String resourcePath = null;
-		String method = null;
+		RequestMethod method = null;
 		
 		if (getProperty("id") == null) {
-			method = "POST";
+			method = POST;
 			resourcePath = getResourcePath();
 		} else {
-			method = "PUT";
+			method = PUT;
 			resourcePath = getResourcePath() + '/' + getProperty("id");
 		}
 		
@@ -161,7 +167,7 @@ public abstract class InstanceResource<C extends RestClient> extends Resource<C>
 		if (getProperty("id") == null) {
 			throw new UnsupportedOperationException("This operation is unsupported for non existent objects");
 		} else {
-			RestResponse response = getClient().request(getResourcePath() + '/' + getProperty("id"), "DELETE");
+			RestResponse response = getClient().request(getResourcePath() + '/' + getProperty("id"), DELETE);
             clearProperties();
             
             return !response.isError();

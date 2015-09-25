@@ -5,6 +5,8 @@ import com.textmagic.sdk.RestException;
 import com.textmagic.sdk.RestResponse;
 import com.textmagic.sdk.resource.ListResource;
 
+import static com.textmagic.sdk.RequestMethod.GET;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +38,7 @@ public class TMStatementList extends ListResource<TMStatement, RestClient> {
 		parameters.put("page", Integer.toString(this.page));
         parameters.put("limit", Integer.toString(this.limit));
 
-        RestResponse response = getClient().request(getResourcePath(), "GET", parameters);
+        RestResponse response = getClient().request(getResourcePath(), GET, parameters);
         Map<String, Object> data = response.toMap();
 		page = getIntValue(data.get("page"));
 		limit = getIntValue(data.get("limit"));

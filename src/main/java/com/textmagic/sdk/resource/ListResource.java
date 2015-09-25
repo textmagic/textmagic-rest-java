@@ -4,6 +4,8 @@ import com.textmagic.sdk.RestClient;
 import com.textmagic.sdk.RestException;
 import com.textmagic.sdk.RestResponse;
 
+import static com.textmagic.sdk.RequestMethod.GET;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -122,7 +124,7 @@ public abstract class ListResource<T extends Resource, C extends RestClient> ext
 			sb.append("/search");
 		}
 
-        RestResponse response = getClient().request(sb.toString(), "GET", parameters);
+        RestResponse response = getClient().request(sb.toString(), GET, parameters);
         Map<String, Object> data = response.toMap();
 		page = getIntValue(data.get("page"));
 		limit = getIntValue(data.get("limit"));

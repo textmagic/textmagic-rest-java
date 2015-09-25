@@ -5,6 +5,9 @@ import com.textmagic.sdk.RestException;
 import com.textmagic.sdk.RestResponse;
 import com.textmagic.sdk.resource.InstanceResource;
 
+import static com.textmagic.sdk.RequestMethod.DELETE;
+import static com.textmagic.sdk.RequestMethod.PUT;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
@@ -145,7 +148,7 @@ public class TMList extends InstanceResource<RestClient> {
             	param.add(Integer.toString(id));
             }
             parameters.put("contacts", StringUtils.join(param, ","));
-            RestResponse response = getClient().request(getResourcePath() + '/' + getProperty("id") + "/contacts", "PUT", parameters);
+            RestResponse response = getClient().request(getResourcePath() + '/' + getProperty("id") + "/contacts", PUT, parameters);
             clearParameters();
             return !response.isError();
         } else {
@@ -168,7 +171,7 @@ public class TMList extends InstanceResource<RestClient> {
             	param.add(Integer.toString(id));
             }
             parameters.put("contacts", StringUtils.join(param, ","));
-            RestResponse response = getClient().request(getResourcePath() + '/' + getProperty("id") + "/contacts", "DELETE", parameters);
+            RestResponse response = getClient().request(getResourcePath() + '/' + getProperty("id") + "/contacts", DELETE, parameters);
             clearParameters();
             return !response.isError();
         } else {

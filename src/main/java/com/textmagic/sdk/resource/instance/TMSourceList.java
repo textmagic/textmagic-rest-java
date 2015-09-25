@@ -5,6 +5,8 @@ import com.textmagic.sdk.RestException;
 import com.textmagic.sdk.RestResponse;
 import com.textmagic.sdk.resource.Resource;
 
+import static com.textmagic.sdk.RequestMethod.GET;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +47,7 @@ public class TMSourceList<T extends Resource, C extends RestClient> extends Reso
      */
     @SuppressWarnings("unchecked")
 	public List<String> getDedicatedNumbers() throws RestException {
-        RestResponse response = getClient().request(getResourcePath(), "GET", parameters);
+        RestResponse response = getClient().request(getResourcePath(), GET, parameters);
         Map<String, Object> sources = new HashMap<String, Object>(response.toMap());
 
     	return (List<String>) sources.get("dedicated");
@@ -59,7 +61,7 @@ public class TMSourceList<T extends Resource, C extends RestClient> extends Reso
      */
     @SuppressWarnings("unchecked")
 	public List<String> getUserPhones() throws RestException {
-        RestResponse response = getClient().request(getResourcePath(), "GET", parameters);
+        RestResponse response = getClient().request(getResourcePath(), GET, parameters);
         Map<String, Object> sources = new HashMap<String, Object>(response.toMap());
 
     	return (List<String>) sources.get("user");
@@ -73,7 +75,7 @@ public class TMSourceList<T extends Resource, C extends RestClient> extends Reso
      */
     @SuppressWarnings("unchecked")
 	public List<String> getSharedNumbers() throws RestException {
-        RestResponse response = getClient().request(getResourcePath(), "GET", parameters);
+        RestResponse response = getClient().request(getResourcePath(), GET, parameters);
         Map<String, Object> sources = new HashMap<String, Object>(response.toMap());
 
     	return (List<String>) sources.get("shared");
@@ -87,7 +89,7 @@ public class TMSourceList<T extends Resource, C extends RestClient> extends Reso
      */
     @SuppressWarnings("unchecked")
 	public List<String> getSenderIds() throws RestException {
-        RestResponse response = getClient().request(getResourcePath(), "GET", parameters);
+        RestResponse response = getClient().request(getResourcePath(), GET, parameters);
         Map<String, Object> sources = new HashMap<String, Object>(response.toMap());
 
     	return (List<String>) sources.get("senderIds");

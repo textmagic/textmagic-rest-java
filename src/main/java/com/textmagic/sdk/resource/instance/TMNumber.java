@@ -8,6 +8,10 @@ import com.textmagic.sdk.resource.InstanceResource;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.HashMap;
+
+import static com.textmagic.sdk.RequestMethod.GET;
+import static com.textmagic.sdk.RequestMethod.POST;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +57,7 @@ public class TMNumber extends InstanceResource<RestClient> {
     @Override
 	public boolean createOrUpdate() throws RestException {
 		if (getProperty("id") == null) {
-            RestResponse response = getClient().request(getResourcePath(), "POST", buildRequestParameters(properties));
+            RestResponse response = getClient().request(getResourcePath(), POST, buildRequestParameters(properties));
             Map<String, Object> properties = response.toMap();
             Integer id = (Integer) properties.get("id");
             clearProperties();
@@ -76,7 +80,7 @@ public class TMNumber extends InstanceResource<RestClient> {
         Map<String, String> params = new HashMap<String, String>();
         params.put("country", country);
         params.put("prefix", prefix);
-        RestResponse response = getClient().request(getResourcePath() + "/available", "GET", params);
+        RestResponse response = getClient().request(getResourcePath() + "/available", GET, params);
         Map<String, Object> available = new HashMap<String, Object>(response.toMap());
 
     	return (List<String>) available.get("numbers");

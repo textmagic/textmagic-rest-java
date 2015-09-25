@@ -5,6 +5,8 @@ import com.textmagic.sdk.RestException;
 import com.textmagic.sdk.RestResponse;
 import com.textmagic.sdk.resource.Resource;
 
+import static com.textmagic.sdk.RequestMethod.POST;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -50,7 +52,7 @@ public class TMNewMessage extends Resource<RestClient> {
 	 */
 	public boolean send() throws RestException {
         properties.put("dummy", false);
-		RestResponse response = getClient().request(getResourcePath(), "POST", buildRequestParameters(properties));
+		RestResponse response = getClient().request(getResourcePath(), POST, buildRequestParameters(properties));
         this.properties = new HashMap<String, Object>(response.toMap());
         return !response.isError();
 	}
@@ -63,7 +65,7 @@ public class TMNewMessage extends Resource<RestClient> {
 	 */
 	public Double getPrice() throws RestException {
         properties.put("dummy", true);
-		RestResponse response = getClient().request(getResourcePath(), "POST", buildRequestParameters(properties));
+		RestResponse response = getClient().request(getResourcePath(), POST, buildRequestParameters(properties));
 		Map<String, Object> result = new HashMap<String, Object>(response.toMap());
 		return (Double) result.get("total");
 	}

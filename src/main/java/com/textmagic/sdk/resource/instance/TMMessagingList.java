@@ -5,6 +5,8 @@ import com.textmagic.sdk.RestException;
 import com.textmagic.sdk.RestResponse;
 import com.textmagic.sdk.resource.Resource;
 
+import static com.textmagic.sdk.RequestMethod.GET;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -50,7 +52,7 @@ public class TMMessagingList<T extends Resource, C extends RestClient> extends R
 	public Iterator<TMMessaging> iterator() throws RestException {
     	List<TMMessaging> data = new ArrayList<TMMessaging>();
 
-        RestResponse response = getClient().request(getResourcePath(), "GET", parameters);
+        RestResponse response = getClient().request(getResourcePath(), GET, parameters);
         List<Object> items = response.toList();
         
         for (Object item : items) {

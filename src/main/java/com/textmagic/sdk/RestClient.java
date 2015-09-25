@@ -317,7 +317,7 @@ public class RestClient {
 	 * @return Textmagic response instance
      * @throws RestException exception
 	 */
-	public RestResponse request(final String path, final String method) throws RestException {
+	public RestResponse request(final String path, final RequestMethod method) throws RestException {
 		Map<String, String> param = new HashMap<String, String>();
 		
 		return request(path, method, param);
@@ -332,7 +332,7 @@ public class RestClient {
 	 * @return Textmagic response instance
      * @throws RestException exception
 	 */
-	public RestResponse request(final String path, final String method, final List<NameValuePair> paramList) throws RestException {
+	public RestResponse request(final String path, final RequestMethod method, final List<NameValuePair> paramList) throws RestException {
 		if (path == null && method == null && paramList == null) {
 			return new RestResponse("", 0);
 		}
@@ -384,7 +384,7 @@ public class RestClient {
 	 * @return Textmagic response instance
      * @throws RestException exception
 	 */
-	public RestResponse request(final String path, final String method, final Map<String, String> paramMap) throws RestException {
+	public RestResponse request(final String path, final RequestMethod method, final Map<String, String> paramMap) throws RestException {
 		List<NameValuePair> paramList = buildParametersList(paramMap);
         
 		return request(path, method, paramList);
@@ -398,7 +398,7 @@ public class RestClient {
 	 * @param params Request params
 	 * @return HTTP request instance
 	 */
-	private HttpUriRequest buildRequest(final String method, String path, final List<NameValuePair> params) {
+	private HttpUriRequest buildRequest(final RequestMethod method, String path, final List<NameValuePair> params) {
 		String normalizedPath = path.toLowerCase();
 		StringBuilder sb = new StringBuilder();
 
@@ -412,15 +412,20 @@ public class RestClient {
 
 		HttpUriRequest request;
         
-        if (method.equalsIgnoreCase("GET")) {
+		switch(method) {
+		case GET:
 			request = buildGetRequest(path, params);
-		} else if (method.equalsIgnoreCase("POST")) {
+			break;
+		case POST:
 			request = buildPostRequest(path, params);
-		} else if (method.equalsIgnoreCase("PUT")) {
+			break;
+		case PUT:
 			request = buildPutRequest(path, params);
-		} else if (method.equalsIgnoreCase("DELETE")) {
+			break;
+		case DELETE:
 			request = buildDeleteRequest(path, params);
-		} else {
+			break;
+		default:
 			throw new IllegalArgumentException("Unknown Method: " + method);
 		}
 

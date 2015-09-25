@@ -5,6 +5,9 @@ import com.textmagic.sdk.RestException;
 import com.textmagic.sdk.RestResponse;
 import com.textmagic.sdk.resource.Resource;
 
+import static com.textmagic.sdk.RequestMethod.GET;
+import static com.textmagic.sdk.RequestMethod.PUT;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -44,7 +47,7 @@ public class TMAccount extends Resource<RestClient> {
 	 * @throws RestException exception
 	 */
 	public boolean get() throws RestException {
-		RestResponse response = getClient().request(getResourcePath(), "GET");
+		RestResponse response = getClient().request(getResourcePath(), GET);
         this.properties = new HashMap<String, Object>(response.toMap());
         return !response.isError();
 	}
@@ -56,7 +59,7 @@ public class TMAccount extends Resource<RestClient> {
 	 * @throws RestException exception
 	 */
 	public boolean update() throws RestException {
-		getClient().request(getResourcePath(), "PUT", buildRequestParameters(properties));
+		getClient().request(getResourcePath(), PUT, buildRequestParameters(properties));
 		this.properties = new HashMap<String, Object>();
         return get();
 	}    

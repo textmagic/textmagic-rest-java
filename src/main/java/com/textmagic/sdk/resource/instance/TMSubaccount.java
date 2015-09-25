@@ -5,6 +5,11 @@ import com.textmagic.sdk.RestException;
 import com.textmagic.sdk.RestResponse;
 
 import java.util.HashSet;
+
+import static com.textmagic.sdk.RequestMethod.DELETE;
+import static com.textmagic.sdk.RequestMethod.GET;
+import static com.textmagic.sdk.RequestMethod.POST;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -50,7 +55,7 @@ public class TMSubaccount extends TMUser {
     @Override
     public boolean get(Integer id) throws RestException {
 		if (properties.size() == 0) {
-            RestResponse response = getClient().request(getResourcePath() + '/' + id, "GET");
+            RestResponse response = getClient().request(getResourcePath() + '/' + id, GET);
             this.properties = new HashMap<String, Object>(response.toMap());
             return !response.isError();
 		} else {
@@ -61,7 +66,7 @@ public class TMSubaccount extends TMUser {
     @Override
 	public boolean createOrUpdate() throws RestException {
 		if (getProperty("id") == null) {
-			RestResponse response = getClient().request(getResourcePath(), "POST", buildRequestParameters(properties));
+			RestResponse response = getClient().request(getResourcePath(), POST, buildRequestParameters(properties));
             clearProperties();
             return !response.isError();
 		} else {
@@ -74,7 +79,7 @@ public class TMSubaccount extends TMUser {
 		if (getProperty("id") == null) {
 			throw new UnsupportedOperationException("This operation is unsupported for non existent objects");
 		} else {
-			RestResponse response = getClient().request(getResourcePath() + '/' + getProperty("id"), "DELETE");
+			RestResponse response = getClient().request(getResourcePath() + '/' + getProperty("id"), DELETE);
             clearProperties();
             return !response.isError();
 		}

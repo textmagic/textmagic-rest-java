@@ -5,6 +5,8 @@ import com.textmagic.sdk.RestException;
 import com.textmagic.sdk.RestResponse;
 import com.textmagic.sdk.resource.InstanceResource;
 
+import static com.textmagic.sdk.RequestMethod.PUT;
+
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
@@ -61,7 +63,7 @@ public class TMCustomField extends InstanceResource<RestClient> {
             clearParameters();
             parameters.put("contactId", Integer.toString(contactId));
             parameters.put("value", value);
-            RestResponse response = getClient().request(getResourcePath() + '/' + getProperty("id") + "/update", "PUT", parameters);
+            RestResponse response = getClient().request(getResourcePath() + '/' + getProperty("id") + "/update", PUT, parameters);
             clearParameters();
             return !response.isError();
         } else {
