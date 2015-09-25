@@ -19,6 +19,8 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import com.textmagic.sdk.resource.Resource;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
@@ -113,13 +115,13 @@ public class RestClient {
 	/**
 	 * Retrieve resource object
 	 *
-	 * @param name Name
+	 * @param clazz Class to instantiate
 	 * @return Resource object
 	 */
-	public Object getResource(String name) {
-		Object resource = null;
+	public <T extends Resource<RestClient>> T getResource(Class<T> clazz) {
+		T resource = null;
 		try {
-			resource = Class.forName("com.textmagic.sdk.resource.instance." + name)
+			resource = clazz
 				.getConstructor(RestClient.class)
 				.newInstance(this);
 		} catch (InstantiationException e) {
@@ -134,8 +136,6 @@ public class RestClient {
 			e.printStackTrace();
 		} catch (SecurityException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		}
 		
 		return resource;
@@ -144,14 +144,14 @@ public class RestClient {
 	/**
 	 * Retrieve resource object
 	 *
-	 * @param name Name
+	 * @param clazz Class to instantiate
 	 * @param parameters Parameters
 	 * @return Resource object
 	 */
-	public Object getResource(String name, Map<String, String> parameters) {
-		Object resource = null;
+	public <T extends Resource<RestClient>> T getResource(Class<T> clazz, Map<String, String> parameters) {
+		T resource = null;
 		try {
-			resource = Class.forName("com.textmagic.sdk.resource.instance." + name)
+			resource = clazz
 				.getConstructor(RestClient.class, Map.class)
 				.newInstance(this, parameters);
 		} catch (InstantiationException e) {
@@ -165,8 +165,6 @@ public class RestClient {
 		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		

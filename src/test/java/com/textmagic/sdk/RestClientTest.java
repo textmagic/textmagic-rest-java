@@ -17,7 +17,7 @@ public class RestClientTest extends BasicTest {
     public void testBulk() throws Exception {
 		Map<String, String> parameters = new HashMap<String, String>();
 		setMockResponse("GET", "bulks/1", parameters, "bulkRetrieve.json", 200);
-        TMBulk b = (TMBulk) client.getResource("TMBulk");
+        TMBulk b = client.getResource(TMBulk.class);
         try {
             b.get(1);
         } catch (final RestException e) {
@@ -38,7 +38,7 @@ public class RestClientTest extends BasicTest {
 		parameters.put("page", "1");
 		parameters.put("limit", "10");
 		setMockResponse("GET", "bulks", parameters, "bulkList.json", 200);
-		TMBulkList bl = (TMBulkList) client.getResource("TMBulkList");		
+		TMBulkList bl = client.getResource(TMBulkList.class);		
 		Iterator<TMBulk> iterator = bl.iterator();
 		assertTrue(iterator.hasNext());
 		TMBulk b = iterator.next();
@@ -58,7 +58,7 @@ public class RestClientTest extends BasicTest {
 		parameters.put("limit", "10");
 		setMockResponse("GET", "chats", parameters, "chatList.json", 200);
 		setMockResponse("GET", "chats/1234567890", parameters, "chatMessageList.json", 200);
-		TMChatList cl = (TMChatList) client.getResource("TMChatList");
+		TMChatList cl = client.getResource(TMChatList.class);
 		Iterator<TMChat> iterator = cl.iterator();
 		assertTrue(iterator.hasNext());
 		TMChat c = iterator.next();
@@ -82,7 +82,7 @@ public class RestClientTest extends BasicTest {
 		parameters.put("page", "1");
 		parameters.put("limit", "10");
 		setMockResponse("GET", "lists", parameters, "listList.json", 200);
-		TMListList ll = (TMListList) client.getResource("TMListList");		
+		TMListList ll = client.getResource(TMListList.class);		
 		Iterator<TMList> iterator = ll.iterator();
 		assertTrue(iterator.hasNext());
 		TMList l = iterator.next();
@@ -101,7 +101,7 @@ public class RestClientTest extends BasicTest {
 		parameters.put("page", "1");
 		parameters.put("limit", "10");
 		setMockResponse("GET", "lists/search", parameters, "listList.json", 200);
-		TMListList ll = (TMListList) client.getResource("TMListList", parameters);		
+		TMListList ll = client.getResource(TMListList.class, parameters);
 		Iterator<TMList> iterator = ll.iterator();
 		assertTrue(iterator.hasNext());
 		TMList l = iterator.next();
@@ -121,7 +121,7 @@ public class RestClientTest extends BasicTest {
 		setMockResponse("POST", "lists", parametersPost, "listCreateUpdate.json", 201);
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "lists/1", parametersGet, "listRetrieve.json", 200);
-		TMList l = (TMList) client.getResource("TMList");
+		TMList l = client.getResource(TMList.class);
 		l.setName("TEST");
 		l.setShared(true);
 		try {
@@ -141,7 +141,7 @@ public class RestClientTest extends BasicTest {
     public void testUpdateList() throws Exception {
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "lists/1", parametersGet, "listRetrieve.json", 200);
-		TMList l = (TMList) client.getResource("TMList");
+		TMList l = client.getResource(TMList.class);
 		try {
 		    l.get(1);
 		} catch (final RestException e) {
@@ -184,7 +184,7 @@ public class RestClientTest extends BasicTest {
 		setMockResponse("POST", "contacts", parametersPost, "contactCreateUpdate.json", 201);
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "contacts/1", parametersGet, "contactRetrieve.json", 200);
-		TMContact c = (TMContact) client.getResource("TMContact");
+		TMContact c = client.getResource(TMContact.class);
 		c.setFirstName("TEST");
 		c.setLastName("TEST");
 		c.setPhone("1234567890");
@@ -209,7 +209,7 @@ public class RestClientTest extends BasicTest {
 	public void testUpdateListContacts() throws Exception {
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "lists/1", parametersGet, "listRetrieve.json", 200);
-		TMList l = (TMList) client.getResource("TMList");
+		TMList l = client.getResource(TMList.class);
 		try {
 		    l.get(1);
 		} catch (final RestException e) {
@@ -226,7 +226,7 @@ public class RestClientTest extends BasicTest {
 	public void testDeleteListContacts() throws Exception {
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "lists/1", parametersGet, "listRetrieve.json", 200);
-		TMList l = (TMList) client.getResource("TMList");
+		TMList l = client.getResource(TMList.class);
 		try {
 		    l.get(1);
 		} catch (final RestException e) {
@@ -243,7 +243,7 @@ public class RestClientTest extends BasicTest {
 	public void retrieveListContacts() throws Exception {
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "lists/1", parametersGet, "listRetrieve.json", 200);
-		TMList l = (TMList) client.getResource("TMList");
+		TMList l = client.getResource(TMList.class);
 		try {
 		    l.get(1);
 		} catch (final RestException e) {
@@ -272,7 +272,7 @@ public class RestClientTest extends BasicTest {
 		parameters.put("page", "1");
 		parameters.put("limit", "10");
 		setMockResponse("GET", "contacts", parameters, "contactList.json", 200);
-		TMContactList cl = (TMContactList) client.getResource("TMContactList", parameters);
+		TMContactList cl = client.getResource(TMContactList.class, parameters);
 		Iterator<TMContact> iterator = cl.iterator();
 		assertTrue(iterator.hasNext());
 		TMContact c = iterator.next();
@@ -293,7 +293,7 @@ public class RestClientTest extends BasicTest {
 		parameters.put("page", "1");
 		parameters.put("limit", "10");
 		setMockResponse("GET", "contacts/search", parameters, "contactList.json", 200);
-		TMContactList cl = (TMContactList) client.getResource("TMContactList", parameters);
+		TMContactList cl = client.getResource(TMContactList.class, parameters);
 		Iterator<TMContact> iterator = cl.iterator();
 		assertTrue(iterator.hasNext());
 		TMContact c = iterator.next();
@@ -311,7 +311,7 @@ public class RestClientTest extends BasicTest {
     public void testUpdateContact() throws Exception {
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "contacts/1", parametersGet, "contactRetrieve.json", 200);
-		TMContact c = (TMContact) client.getResource("TMContact");
+		TMContact c = client.getResource(TMContact.class);
 		try {
 		    c.get(1);
 		} catch (final RestException e) {
@@ -359,7 +359,7 @@ public class RestClientTest extends BasicTest {
 		parameters.put("page", "1");
 		parameters.put("limit", "10");
 		setMockResponse("GET", "customfields", parameters, "customfieldList.json", 200);
-		TMCustomFieldList cfl = (TMCustomFieldList) client.getResource("TMCustomFieldList");
+		TMCustomFieldList cfl = client.getResource(TMCustomFieldList.class);
 		Iterator<TMCustomField> iterator = cfl.iterator();
 		assertTrue(iterator.hasNext());
 		TMCustomField c = iterator.next();
@@ -375,7 +375,7 @@ public class RestClientTest extends BasicTest {
 		setMockResponse("POST", "customfields", parametersPost, "customfieldCreateUpdate.json", 201);
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "customfields/1", parametersGet, "customfieldRetrieve.json", 200);
-		TMCustomField c = (TMCustomField) client.getResource("TMCustomField");
+		TMCustomField c = client.getResource(TMCustomField.class);
 		c.setName("TEST");
 		try {
 		    c.createOrUpdate();
@@ -391,7 +391,7 @@ public class RestClientTest extends BasicTest {
     public void testUpdateCustomField() throws Exception {
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "customfields/1", parametersGet, "customfieldRetrieve.json", 200);
-		TMCustomField c = (TMCustomField) client.getResource("TMCustomField");
+		TMCustomField c = client.getResource(TMCustomField.class);
 		try {
 		    c.get(1);
 		} catch (final RestException e) {
@@ -419,7 +419,7 @@ public class RestClientTest extends BasicTest {
     public void testUpdateCustomFieldValue() throws Exception {
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "customfields/1", parametersGet, "customfieldRetrieve.json", 200);
-		TMCustomField c = (TMCustomField) client.getResource("TMCustomField");
+		TMCustomField c = client.getResource(TMCustomField.class);
 		try {
 		    c.get(1);
 		} catch (final RestException e) {
@@ -437,7 +437,7 @@ public class RestClientTest extends BasicTest {
     public void testDeleteCustomField() throws Exception {
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "customfields/1", parametersGet, "customfieldRetrieve.json", 200);
-		TMCustomField c = (TMCustomField) client.getResource("TMCustomField");
+		TMCustomField c = client.getResource(TMCustomField.class);
 		try {
 		    c.get(1);
 		} catch (final RestException e) {
@@ -458,7 +458,7 @@ public class RestClientTest extends BasicTest {
     public void testDeleteContact() throws Exception {
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "contacts/1", parametersGet, "contactRetrieve.json", 200);
-		TMContact c = (TMContact) client.getResource("TMContact");
+		TMContact c = client.getResource(TMContact.class);
 		try {
 		    c.get(1);
 		} catch (final RestException e) {
@@ -481,7 +481,7 @@ public class RestClientTest extends BasicTest {
 		parameters.put("page", "1");
 		parameters.put("limit", "10");
 		setMockResponse("GET", "messages", parameters, "messageList.json", 200);
-		TMMessageList ml = (TMMessageList) client.getResource("TMMessageList");
+		TMMessageList ml = client.getResource(TMMessageList.class);
 		Iterator<TMMessage> iterator = ml.iterator();
 		assertTrue(iterator.hasNext());
 		TMMessage m = iterator.next();
@@ -499,7 +499,7 @@ public class RestClientTest extends BasicTest {
 		parameters.put("page", "1");
 		parameters.put("limit", "10");
 		setMockResponse("GET", "messages/search", parameters, "messageList.json", 200);
-		TMMessageList ml = (TMMessageList) client.getResource("TMMessageList", parameters);
+		TMMessageList ml = client.getResource(TMMessageList.class, parameters);
 		Iterator<TMMessage> iterator = ml.iterator();
 		assertTrue(iterator.hasNext());
 		TMMessage m = iterator.next();
@@ -517,7 +517,7 @@ public class RestClientTest extends BasicTest {
 		parametersPost.put("phones", "1234567890");
 		parametersPost.put("dummy", "1");
 		setMockResponse("POST", "messages", parametersPost, "messagePrice.json", 201);
-		TMNewMessage m = (TMNewMessage) client.getResource("TMNewMessage");
+		TMNewMessage m = client.getResource(TMNewMessage.class);
 		m.setText("TEST");
 		m.setPhones(Arrays.asList(new String[] {"1234567890"}));
 		try {
@@ -535,7 +535,7 @@ public class RestClientTest extends BasicTest {
 		parametersPost.put("phones", "1234567890");
 		parametersPost.put("dummy", "0");
 		setMockResponse("POST", "messages", parametersPost, "messageSend.json", 201);
-		TMNewMessage m = (TMNewMessage) client.getResource("TMNewMessage");
+		TMNewMessage m = client.getResource(TMNewMessage.class);
 		m.setText("TEST");
 		m.setPhones(Arrays.asList(new String[] {"1234567890"}));
 		try {
@@ -553,7 +553,7 @@ public class RestClientTest extends BasicTest {
 		parameters.put("page", "1");
 		parameters.put("limit", "10");
 		setMockResponse("GET", "sessions", parameters, "sessionList.json", 200);
-		TMSessionList sl = (TMSessionList) client.getResource("TMSessionList");
+		TMSessionList sl = client.getResource(TMSessionList.class);
 		Iterator<TMSession> iterator = sl.iterator();
 		assertTrue(iterator.hasNext());
 		TMSession s = iterator.next();
@@ -569,7 +569,7 @@ public class RestClientTest extends BasicTest {
     public void testSession() throws Exception {
 		Map<String, String> parameters = new HashMap<String, String>();
 		setMockResponse("GET", "sessions/1", parameters, "sessionRetrieve.json", 200);
-        TMSession s = (TMSession) client.getResource("TMSession");
+        TMSession s = client.getResource(TMSession.class);
         try {
             s.get(1);
         } catch (final RestException e) {
@@ -587,7 +587,7 @@ public class RestClientTest extends BasicTest {
     public void testMessage() throws Exception {
 		Map<String, String> parameters = new HashMap<String, String>();
 		setMockResponse("GET", "messages/1", parameters, "messageRetrieve.json", 200);
-        TMMessage m = (TMMessage) client.getResource("TMMessage");
+        TMMessage m = client.getResource(TMMessage.class);
         try {
             m.get(1);
         } catch (final RestException e) {
@@ -604,7 +604,7 @@ public class RestClientTest extends BasicTest {
     public void testDeleteMessage() throws Exception {
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "messages/1", parametersGet, "messageRetrieve.json", 200);
-		TMMessage m = (TMMessage) client.getResource("TMMessage");
+		TMMessage m = client.getResource(TMMessage.class);
 		try {
 		    m.get(1);
 		} catch (final RestException e) {
@@ -625,7 +625,7 @@ public class RestClientTest extends BasicTest {
     public void testDeleteSession() throws Exception {
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "sessions/1", parametersGet, "sessionRetrieve.json", 200);
-		TMSession s = (TMSession) client.getResource("TMSession");
+		TMSession s = client.getResource(TMSession.class);
 		try {
 		    s.get(1);
 		} catch (final RestException e) {
@@ -648,7 +648,7 @@ public class RestClientTest extends BasicTest {
 		parameters.put("page", "1");
 		parameters.put("limit", "10");
 		setMockResponse("GET", "replies", parameters, "replyList.json", 200);
-		TMReplyList rl = (TMReplyList) client.getResource("TMReplyList");
+		TMReplyList rl = client.getResource(TMReplyList.class);
 		Iterator<TMReply> iterator = rl.iterator();
 		assertTrue(iterator.hasNext());
 		TMReply r = iterator.next();
@@ -666,7 +666,7 @@ public class RestClientTest extends BasicTest {
 		parameters.put("page", "1");
 		parameters.put("limit", "10");
 		setMockResponse("GET", "replies/search", parameters, "replyList.json", 200);
-		TMReplyList rl = (TMReplyList) client.getResource("TMReplyList", parameters);
+		TMReplyList rl = client.getResource(TMReplyList.class, parameters);
 		Iterator<TMReply> iterator = rl.iterator();
 		assertTrue(iterator.hasNext());
 		TMReply r = iterator.next();
@@ -681,7 +681,7 @@ public class RestClientTest extends BasicTest {
     public void testReply() throws Exception {
 		Map<String, String> parameters = new HashMap<String, String>();
 		setMockResponse("GET", "replies/1", parameters, "replyRetrieve.json", 200);
-        TMReply r = (TMReply) client.getResource("TMReply");
+        TMReply r = client.getResource(TMReply.class);
         try {
             r.get(1);
         } catch (final RestException e) {
@@ -698,7 +698,7 @@ public class RestClientTest extends BasicTest {
     public void testDeleteReply() throws Exception {
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "replies/1", parametersGet, "replyRetrieve.json", 200);
-		TMReply r = (TMReply) client.getResource("TMReply");
+		TMReply r = client.getResource(TMReply.class);
 		try {
 		    r.get(1);
 		} catch (final RestException e) {
@@ -721,7 +721,7 @@ public class RestClientTest extends BasicTest {
 		parameters.put("page", "1");
 		parameters.put("limit", "10");
 		setMockResponse("GET", "schedules", parameters, "scheduleList.json", 200);
-		TMScheduleList sl = (TMScheduleList) client.getResource("TMScheduleList");
+		TMScheduleList sl = client.getResource(TMScheduleList.class);
 		Iterator<TMSchedule> iterator = sl.iterator();
 		assertTrue(iterator.hasNext());
 		TMSchedule s = iterator.next();
@@ -734,7 +734,7 @@ public class RestClientTest extends BasicTest {
     public void testSchedule() throws Exception {
 		Map<String, String> parameters = new HashMap<String, String>();
 		setMockResponse("GET", "schedules/1", parameters, "scheduleRetrieve.json", 200);
-        TMSchedule s = (TMSchedule) client.getResource("TMSchedule");
+        TMSchedule s = client.getResource(TMSchedule.class);
         try {
             s.get(1);
         } catch (final RestException e) {
@@ -749,7 +749,7 @@ public class RestClientTest extends BasicTest {
     public void testDeleteSchedule() throws Exception {
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "schedules/1", parametersGet, "scheduleRetrieve.json", 200);
-		TMSchedule s = (TMSchedule) client.getResource("TMSchedule");
+		TMSchedule s = client.getResource(TMSchedule.class);
 		try {
 		    s.get(1);
 		} catch (final RestException e) {
@@ -772,7 +772,7 @@ public class RestClientTest extends BasicTest {
 		parameters.put("page", "1");
 		parameters.put("limit", "10");
 		setMockResponse("GET", "templates", parameters, "templateList.json", 200);
-		TMTemplateList tl = (TMTemplateList) client.getResource("TMTemplateList");
+		TMTemplateList tl = client.getResource(TMTemplateList.class);
 		Iterator<TMTemplate> iterator = tl.iterator();
 		assertTrue(iterator.hasNext());
 		TMTemplate t = iterator.next();
@@ -789,7 +789,7 @@ public class RestClientTest extends BasicTest {
 		parameters.put("page", "1");
 		parameters.put("limit", "10");
 		setMockResponse("GET", "templates/search", parameters, "templateList.json", 200);
-		TMTemplateList tl = (TMTemplateList) client.getResource("TMTemplateList", parameters);
+		TMTemplateList tl = client.getResource(TMTemplateList.class, parameters);
 		Iterator<TMTemplate> iterator = tl.iterator();
 		assertTrue(iterator.hasNext());
 		TMTemplate t = iterator.next();
@@ -807,7 +807,7 @@ public class RestClientTest extends BasicTest {
 		setMockResponse("POST", "templates", parametersPost, "templateCreateUpdate.json", 201);
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "templates/1", parametersGet, "templateRetrieve.json", 200);
-		TMTemplate t = (TMTemplate) client.getResource("TMTemplate");
+		TMTemplate t = client.getResource(TMTemplate.class);
 		t.setName("TEST");
 		t.setContent("TEST");
 		try {
@@ -825,7 +825,7 @@ public class RestClientTest extends BasicTest {
     public void testUpdateTemplate() throws Exception {
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "templates/1", parametersGet, "templateRetrieve.json", 200);
-		TMTemplate t = (TMTemplate) client.getResource("TMTemplate");
+		TMTemplate t = client.getResource(TMTemplate.class);
 		try {
 		    t.get(1);
 		} catch (final RestException e) {
@@ -857,7 +857,7 @@ public class RestClientTest extends BasicTest {
     public void testDeleteTemplate() throws Exception {
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "templates/1", parametersGet, "templateRetrieve.json", 200);
-		TMTemplate t = (TMTemplate) client.getResource("TMTemplate");
+		TMTemplate t = client.getResource(TMTemplate.class);
 		try {
 		    t.get(1);
 		} catch (final RestException e) {
@@ -880,7 +880,7 @@ public class RestClientTest extends BasicTest {
 		parameters.put("page", "1");
 		parameters.put("limit", "10");
 		setMockResponse("GET", "unsubscribers", parameters, "unsubscriberList.json", 200);
-		TMUnsubscriberList ul = (TMUnsubscriberList) client.getResource("TMUnsubscriberList");
+		TMUnsubscriberList ul = client.getResource(TMUnsubscriberList.class);
 		Iterator<TMUnsubscriber> iterator = ul.iterator();
 		assertTrue(iterator.hasNext());
 		TMUnsubscriber u = iterator.next();
@@ -898,7 +898,7 @@ public class RestClientTest extends BasicTest {
 		setMockResponse("POST", "unsubscribers", parametersPost, "unsubscriberCreateUpdate.json", 201);
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "unsubscribers/1", parametersGet, "unsubscriberRetrieve.json", 200);
-		TMUnsubscriber u = (TMUnsubscriber) client.getResource("TMUnsubscriber");
+		TMUnsubscriber u = client.getResource(TMUnsubscriber.class);
 		u.setPhone("1234567890");
 		try {
 		    u.createOrUpdate();
@@ -916,7 +916,7 @@ public class RestClientTest extends BasicTest {
     public void testUpdateUser() throws Exception {
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "user", parametersGet, "userRetrieve.json", 200);
-		TMAccount a = (TMAccount) client.getResource("TMAccount");
+		TMAccount a = client.getResource(TMAccount.class);
 		try {
 		    a.get();
 		} catch (final RestException e) {
@@ -958,7 +958,7 @@ public class RestClientTest extends BasicTest {
 		parameters.put("page", "1");
 		parameters.put("limit", "10");
 		setMockResponse("GET", "invoices", parameters, "invoiceList.json", 200);
-		TMInvoiceList il = (TMInvoiceList) client.getResource("TMInvoiceList");
+		TMInvoiceList il = client.getResource(TMInvoiceList.class);
 		Iterator<TMInvoice> iterator = il.iterator();
 		assertTrue(iterator.hasNext());
 		TMInvoice i = iterator.next();
@@ -976,7 +976,7 @@ public class RestClientTest extends BasicTest {
 		parameters.put("page", "1");
 		parameters.put("limit", "10");
 		setMockResponse("GET", "numbers", parameters, "numberList.json", 200);
-		TMNumberList nl = (TMNumberList) client.getResource("TMNumberList");
+		TMNumberList nl = client.getResource(TMNumberList.class);
 		Iterator<TMNumber> iterator = nl.iterator();
 		assertTrue(iterator.hasNext());
 		TMNumber n = iterator.next();
@@ -994,7 +994,7 @@ public class RestClientTest extends BasicTest {
 		parameters.put("country", "GB");
 		parameters.put("prefix", null);
 		setMockResponse("GET", "numbers/available", parameters, "availableNumberList.json", 200);
-		TMNumber n = (TMNumber) client.getResource("TMNumber");
+		TMNumber n = client.getResource(TMNumber.class);
 		List<String> nlist = null;
 		try {
 		    nlist = n.getAvailableNumbers("GB", null);
@@ -1014,7 +1014,7 @@ public class RestClientTest extends BasicTest {
 		setMockResponse("POST", "numbers", parameters, "numberCreateUpdate.json", 201);
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "numbers/1", parametersGet, "numberRetrieve.json", 200);
-		TMNumber n = (TMNumber) client.getResource("TMNumber");
+		TMNumber n = client.getResource(TMNumber.class);
 		n.setCountry("GB");
 		n.setPhone("1234567890");
 		n.setUserId(1);
@@ -1035,7 +1035,7 @@ public class RestClientTest extends BasicTest {
     public void testDeleteNumber() throws Exception {
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "numbers/1", parametersGet, "numberRetrieve.json", 200);
-		TMNumber n = (TMNumber) client.getResource("TMNumber");
+		TMNumber n = client.getResource(TMNumber.class);
 		try {
 		    n.get(1);
 		} catch (final RestException e) {
@@ -1058,7 +1058,7 @@ public class RestClientTest extends BasicTest {
 		parameters.put("page", "1");
 		parameters.put("limit", "10");
 		setMockResponse("GET", "senderids", parameters, "senderIdList.json", 200);
-		TMSenderIdList sl = (TMSenderIdList) client.getResource("TMSenderIdList");
+		TMSenderIdList sl = client.getResource(TMSenderIdList.class);
 		Iterator<TMSenderId> iterator = sl.iterator();
 		assertTrue(iterator.hasNext());
 		TMSenderId s = iterator.next();
@@ -1077,7 +1077,7 @@ public class RestClientTest extends BasicTest {
 		setMockResponse("POST", "senderids", parametersPost, "senderIdCreateUpdate.json", 201);
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "senderids/1", parametersGet, "senderIdRetrieve.json", 200);
-		TMSenderId s = (TMSenderId) client.getResource("TMSenderId");
+		TMSenderId s = client.getResource(TMSenderId.class);
 		s.setSenderId("TEST");
 		s.setExplanation("TEST");
 		try {
@@ -1096,7 +1096,7 @@ public class RestClientTest extends BasicTest {
     public void testDeleteSenderId() throws Exception {
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "senderids/1", parametersGet, "senderIdRetrieve.json", 200);
-		TMSenderId s = (TMSenderId) client.getResource("TMSenderId");
+		TMSenderId s = client.getResource(TMSenderId.class);
 		try {
 		    s.get(1);
 		} catch (final RestException e) {
@@ -1119,7 +1119,7 @@ public class RestClientTest extends BasicTest {
 		parameters.put("page", "1");
 		parameters.put("limit", "10");
 		setMockResponse("GET", "subaccounts", parameters, "subaccountList.json", 200);
-		TMSubaccountList sl = (TMSubaccountList) client.getResource("TMSubaccountList");
+		TMSubaccountList sl = client.getResource(TMSubaccountList.class);
 		Iterator<TMSubaccount> iterator = sl.iterator();
 		assertTrue(iterator.hasNext());
 		TMSubaccount s = iterator.next();
@@ -1140,7 +1140,7 @@ public class RestClientTest extends BasicTest {
 		parametersPost.put("email", "TEST");
 		parametersPost.put("role", "U");
 		setMockResponse("POST", "subaccounts", parametersPost, null, 201);
-		TMSubaccount s = (TMSubaccount) client.getResource("TMSubaccount");
+		TMSubaccount s = client.getResource(TMSubaccount.class);
 		s.setEmail("TEST");
 		s.setRole("U");
 		try {
@@ -1155,7 +1155,7 @@ public class RestClientTest extends BasicTest {
     public void testDeleteSubaccount() throws Exception {
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "subaccounts/1", parametersGet, "subaccountRetrieve.json", 200);
-		TMSubaccount s = (TMSubaccount) client.getResource("TMSubaccount");
+		TMSubaccount s = client.getResource(TMSubaccount.class);
 		try {
 		    s.get(1);
 		} catch (final RestException e) {
@@ -1177,7 +1177,7 @@ public class RestClientTest extends BasicTest {
     public void testSources() throws Exception {
 		Map<String, String> parametersGet = new HashMap<String, String>();
 		setMockResponse("GET", "sources", parametersGet, "sourceList.json", 200);
-		TMSourceList sl = (TMSourceList) client.getResource("TMSourceList");
+		TMSourceList sl = client.getResource(TMSourceList.class);
 		@SuppressWarnings("unchecked")
 		List<String> dl = sl.getDedicatedNumbers();
 		@SuppressWarnings("unchecked")
@@ -1200,7 +1200,7 @@ public class RestClientTest extends BasicTest {
 		parameters.put("page", "1");
 		parameters.put("limit", "10");	
 		setMockResponse("GET", "stats/spending", parameters, "statementList.json", 200);
-		TMStatementList sl = (TMStatementList) client.getResource("TMStatementList", parameters);
+		TMStatementList sl = client.getResource(TMStatementList.class, parameters);
 		Iterator<TMStatement> iterator = sl.iterator();
 		assertTrue(iterator.hasNext());
 		TMStatement s = iterator.next();
@@ -1219,7 +1219,7 @@ public class RestClientTest extends BasicTest {
     public void testMessaging() throws Exception {
 		Map<String, String> parameters = new HashMap<String, String>();	
 		setMockResponse("GET", "stats/messaging", parameters, "messagingList.json", 200);
-		TMMessagingList ml = (TMMessagingList) client.getResource("TMMessagingList");
+		TMMessagingList ml = client.getResource(TMMessagingList.class);
 		Iterator<TMMessaging> iterator = ml.iterator();
 		assertTrue(iterator.hasNext());
 		TMMessaging m = iterator.next();
