@@ -42,11 +42,20 @@ class HttpDeleteEntity extends HttpPost {
 }
 
 public class RestClient {
-
-    /**
+	/**
      * Used version
      */
-	private static final String version = "v2";
+	private static final String VERSION = "v2";
+
+	/**
+	 * URI for TextMagic API production endpoint
+	 */
+	public static final String PRODUCTION_URI = "https://api.textmagic.com/api/" + VERSION;
+
+	/**
+	 * URI for TextMagic API testing endpoint
+	 */
+	public static final String TESTING_URI = "https://api.textmagic.com/api/" + VERSION;
 
     /**
      * Username
@@ -58,6 +67,11 @@ public class RestClient {
      */
 	private final String token;
 
+	/**
+	 * URI for TextMagic REST API
+	 */
+	private final String uri;
+
     /**
      * Http client instance
      */
@@ -67,14 +81,14 @@ public class RestClient {
      * Previous request time for prevent limit exceed error
      */    
     protected long previousRequestTime = 0;	
-	
+
 	/**
 	 * Retrieve API URI
 	 *
 	 * @return API URI
 	 */
 	public String getApiUri() {
-		return "https://api.textmagictesting.com/api/" + version;
+		return uri;
 	}
     
 	/**
@@ -94,16 +108,18 @@ public class RestClient {
 	public void setHttpClient(final HttpClient client) {
 		this.client = client;
 	}
-    
+
     /**
 	 * Instantiates REST client
 	 *
 	 * @param username API username
 	 * @param token API token
+	 * @param uri URI to the desired TextMagic endpoint
 	 */
-	public RestClient(final String username, final String token) {
+	public RestClient(final String username, final String token, final String uri) {
 		this.username = username;
 		this.token = token;
+		this.uri = uri;
 
 		setHttpClient(new DefaultHttpClient());
 		client.getParams().setParameter("http.protocol.version", HttpVersion.HTTP_1_1);
@@ -429,7 +445,7 @@ public class RestClient {
 			throw new IllegalArgumentException("Unknown Method: " + method);
 		}
 
-		request.addHeader(new BasicHeader("User-Agent", "textmagic-rest-java/" + version));
+		request.addHeader(new BasicHeader("User-Agent", "textmagic-rest-java/" + VERSION));
 		request.addHeader(new BasicHeader("Accept", "application/json"));
 		request.addHeader(new BasicHeader("Accept-Charset", "utf-8"));
 		request.addHeader(new BasicHeader("Accept-Language", "en-US"));
