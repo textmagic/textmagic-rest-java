@@ -133,29 +133,27 @@ public class RestClient {
 	 *
 	 * @param clazz Class to instantiate
 	 * @return Resource object
+	 * @throws RuntimeException exception when class instance can not be created
 	 */
-	public <T extends Resource<RestClient>> T getResource(Class<T> clazz) {
-		T resource = null;
+	public <T extends Resource<RestClient>> T getResource(Class<T> clazz) throws RuntimeException {
 		try {
-			resource = clazz
+			return clazz
 				.getConstructor(RestClient.class)
 				.newInstance(this);
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
+		} catch (final InstantiationException e) {
+			throw new RuntimeException(e);
+		} catch (final IllegalAccessException e) {
+			throw new RuntimeException(e);
+		} catch (final IllegalArgumentException e) {
+			throw new RuntimeException(e);
+		} catch (final InvocationTargetException e) {
+			throw new RuntimeException(e);
+		} catch (final NoSuchMethodException e) {
+			throw new RuntimeException(e);
+		} catch (final SecurityException e) {
+			throw new RuntimeException(e);
 		}
-		
-		return resource;
-	}	
+	}
 	
 	/**
 	 * Retrieve resource object
@@ -163,29 +161,27 @@ public class RestClient {
 	 * @param clazz Class to instantiate
 	 * @param parameters Parameters
 	 * @return Resource object
+	 * @throws RuntimeException exception when class instance can not be created
 	 */
-	public <T extends Resource<RestClient>> T getResource(Class<T> clazz, Map<String, String> parameters) {
-		T resource = null;
+	public <T extends Resource<RestClient>> T getResource(Class<T> clazz, Map<String, String> parameters) throws RuntimeException {
 		try {
-			resource = clazz
+			return clazz
 				.getConstructor(RestClient.class, Map.class)
 				.newInstance(this, parameters);
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
+		} catch (final InstantiationException e) {
+			throw new RuntimeException(e);
+		} catch (final IllegalAccessException e) {
+			throw new RuntimeException(e);
+		} catch (final IllegalArgumentException e) {
+			throw new RuntimeException(e);
+		} catch (final InvocationTargetException e) {
+			throw new RuntimeException(e);
+		} catch (final NoSuchMethodException e) {
+			throw new RuntimeException(e);
+		} catch (final SecurityException e) {
+			throw new RuntimeException(e);
 		}
-		
-		return resource;
-	}		
+	}
 	
 	/**
 	 * Build get request
@@ -346,9 +342,10 @@ public class RestClient {
 	 * @param method Request method
 	 * @param paramList Request params
 	 * @return Textmagic response instance
-     * @throws RestException exception
+     * @throws RestException exception when API request results in error (HTTP error codes in 3xx or 4xx)
+     * @throws RuntimeException exception when network or protocol error is encountered
 	 */
-	public RestResponse request(final String path, final RequestMethod method, final List<NameValuePair> paramList) throws RestException {
+	public RestResponse request(final String path, final RequestMethod method, final List<NameValuePair> paramList) throws RestException, RuntimeException {
 		if (path == null && method == null && paramList == null) {
 			return new RestResponse("", 0);
 		}
@@ -427,7 +424,7 @@ public class RestClient {
 		path = sb.toString();
 
 		HttpUriRequest request;
-        
+
 		switch(method) {
 		case GET:
 			request = buildGetRequest(path, params);
