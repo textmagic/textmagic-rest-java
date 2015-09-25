@@ -8,6 +8,9 @@ import com.textmagic.sdk.resource.InstanceResource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -141,7 +144,7 @@ public class TMList extends InstanceResource<RestClient> {
             for (Integer id : contacts) {
             	param.add(Integer.toString(id));
             }
-            parameters.put("contacts", String.join(",", param));
+            parameters.put("contacts", StringUtils.join(param, ","));
             RestResponse response = getClient().request(getResourcePath() + '/' + getProperty("id") + "/contacts", "PUT", parameters);
             clearParameters();
             return !response.isError();
@@ -164,7 +167,7 @@ public class TMList extends InstanceResource<RestClient> {
             for (Integer id : contacts) {
             	param.add(Integer.toString(id));
             }
-            parameters.put("contacts", String.join(",", param));
+            parameters.put("contacts", StringUtils.join(param, ","));
             RestResponse response = getClient().request(getResourcePath() + '/' + getProperty("id") + "/contacts", "DELETE", parameters);
             clearParameters();
             return !response.isError();

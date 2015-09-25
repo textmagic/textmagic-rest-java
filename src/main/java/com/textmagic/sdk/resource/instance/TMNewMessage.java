@@ -13,6 +13,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
+
 public class TMNewMessage extends Resource<RestClient> {
 
     /**
@@ -143,7 +145,7 @@ public class TMNewMessage extends Resource<RestClient> {
 			param.add(Integer.toString(id));
 		}
     	
-    	setProperty("contacts", String.join(",", param));
+    	setProperty("contacts", StringUtils.join(param, ","));
     }
     
     /**
@@ -157,7 +159,7 @@ public class TMNewMessage extends Resource<RestClient> {
 			param.add(Integer.toString(id));
 		}
     	
-    	setProperty("lists", String.join(",", param));
+    	setProperty("lists", StringUtils.join(param, ","));
     }
     
     /**
@@ -166,7 +168,7 @@ public class TMNewMessage extends Resource<RestClient> {
      * @param phones Phones
      */
     public void setPhones(final List<String> phones) {
-        setProperty("phones", String.join(",", phones));
+        setProperty("phones", StringUtils.join(phones, ","));
     }
     
     /**
