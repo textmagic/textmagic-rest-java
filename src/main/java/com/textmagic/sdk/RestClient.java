@@ -55,7 +55,7 @@ public class RestClient {
 	/**
 	 * URI for TextMagic API testing endpoint
 	 */
-	public static final String TESTING_URI = "https://api.textmagic.com/api/" + VERSION;
+	public static final String TESTING_URI = "https://api.textmagictesting.com/api/" + VERSION;
 
     /**
      * Username

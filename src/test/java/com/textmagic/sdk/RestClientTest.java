@@ -17,6 +17,19 @@ import org.junit.Test;
 import com.textmagic.sdk.resource.instance.*;
 
 public class RestClientTest extends BasicTest {
+
+	@Test
+	public void testEndpointSelectionTest() {
+		client = new RestClient("user", "token", RestClient.TESTING_URI);
+		assertTrue(client.getApiUri().startsWith("https://api.textmagictesting.com"));
+	}
+
+	@Test
+	public void testEndpointSelectionProduction() {
+		client = new RestClient("user", "token", RestClient.PRODUCTION_URI);
+		assertTrue(client.getApiUri().startsWith("https://api.textmagic.com"));
+	}
+
 	@Test
     public void testBulk() throws Exception {
 		Map<String, String> parameters = new HashMap<String, String>();
