@@ -1,5 +1,6 @@
 package com.textmagic.sdk.resource;
 
+import com.textmagic.sdk.ClientException;
 import com.textmagic.sdk.RequestMethod;
 import com.textmagic.sdk.RestClient;
 import com.textmagic.sdk.RestException;
@@ -119,9 +120,10 @@ public abstract class InstanceResource<C extends RestClient> extends Resource<C>
 	 *
 	 * @param id Resource item id
 	 * @return Error state
-	 * @throws RestException exception
+	 * @throws RestException exception when TextMagic REST API returns an error
+	 * @throws ClientException when error occurs on client side
 	 */
-	public boolean get(Integer id) throws RestException {
+	public boolean get(Integer id) throws RestException, ClientException {
 		if (properties.size() == 0) {
             RestResponse response = getClient().request(getResourcePath() + '/' + id, GET);
             this.properties = new HashMap<String, Object>(response.toMap());
@@ -136,9 +138,10 @@ public abstract class InstanceResource<C extends RestClient> extends Resource<C>
 	 * Create or update resource item
      *
      * @return Error state
-	 * @throws RestException exception
+	 * @throws RestException exception when TextMagic REST API returns an error
+	 * @throws ClientException when error occurs on client side
 	 */
-	public boolean createOrUpdate() throws RestException {
+	public boolean createOrUpdate() throws RestException, ClientException {
 		String resourcePath = null;
 		RequestMethod method = null;
 		
@@ -161,9 +164,10 @@ public abstract class InstanceResource<C extends RestClient> extends Resource<C>
 	 * Delete resource item
      *
      * @return Error state
-	 * @throws RestException exception
+	 * @throws RestException exception when TextMagic REST API returns an error
+	 * @throws ClientException when error occurs on client side
 	 */
-	public boolean delete() throws RestException {
+	public boolean delete() throws RestException, ClientException {
 		if (getProperty("id") == null) {
 			throw new UnsupportedOperationException("This operation is unsupported for non existent objects");
 		} else {

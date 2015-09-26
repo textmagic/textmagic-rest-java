@@ -1,5 +1,6 @@
 package com.textmagic.sdk.resource.instance;
 
+import com.textmagic.sdk.ClientException;
 import com.textmagic.sdk.RestClient;
 import com.textmagic.sdk.RestException;
 import com.textmagic.sdk.RestResponse;
@@ -53,7 +54,7 @@ public class TMSubaccount extends TMUser {
     }
     
     @Override
-    public boolean get(Integer id) throws RestException {
+    public boolean get(Integer id) throws RestException, ClientException {
 		if (properties.size() == 0) {
             RestResponse response = getClient().request(getResourcePath() + '/' + id, GET);
             this.properties = new HashMap<String, Object>(response.toMap());
@@ -64,7 +65,7 @@ public class TMSubaccount extends TMUser {
 	}
     
     @Override
-	public boolean createOrUpdate() throws RestException {
+	public boolean createOrUpdate() throws RestException, ClientException {
 		if (getProperty("id") == null) {
 			RestResponse response = getClient().request(getResourcePath(), POST, buildRequestParameters(properties));
             clearProperties();
@@ -75,7 +76,7 @@ public class TMSubaccount extends TMUser {
 	}
     
 	@Override
-	public boolean delete() throws RestException {
+	public boolean delete() throws RestException, ClientException {
 		if (getProperty("id") == null) {
 			throw new UnsupportedOperationException("This operation is unsupported for non existent objects");
 		} else {

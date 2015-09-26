@@ -1,5 +1,6 @@
 package com.textmagic.sdk.resource.instance;
 
+import com.textmagic.sdk.ClientException;
 import com.textmagic.sdk.RestClient;
 import com.textmagic.sdk.RestException;
 import com.textmagic.sdk.RestResponse;
@@ -73,10 +74,11 @@ public class TMNumber extends InstanceResource<RestClient> {
      * @param country Country
      * @param prefix Prefix
      * @return Available numbers
-     * @throws RestException exception
+     * @throws RestException exception when TextMagic REST API returns an error
+	 * @throws ClientException when error occurs on client side
      */
     @SuppressWarnings("unchecked")
-	public List<String> getAvailableNumbers(String country, String prefix) throws RestException {
+	public List<String> getAvailableNumbers(String country, String prefix) throws RestException, ClientException {
         Map<String, String> params = new HashMap<String, String>();
         params.put("country", country);
         params.put("prefix", prefix);

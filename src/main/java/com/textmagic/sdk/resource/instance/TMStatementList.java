@@ -1,5 +1,6 @@
 package com.textmagic.sdk.resource.instance;
 
+import com.textmagic.sdk.ClientException;
 import com.textmagic.sdk.RestClient;
 import com.textmagic.sdk.RestException;
 import com.textmagic.sdk.RestResponse;
@@ -34,7 +35,7 @@ public class TMStatementList extends ListResource<TMStatement, RestClient> {
 
     @Override
     @SuppressWarnings("unchecked")
-	protected void getListContent() throws RestException {
+	protected void getListContent() throws RestException, ClientException {
 		parameters.put("page", Integer.toString(this.page));
         parameters.put("limit", Integer.toString(this.limit));
 

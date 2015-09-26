@@ -115,7 +115,7 @@ public abstract class ListResource<T extends Resource, C extends RestClient> ext
 	 * @throws RestException exception
 	 */
     @SuppressWarnings("unchecked")
-	protected void getListContent() throws RestException {
+	protected void getListContent() throws RestException, ClientException {
 		parameters.put("page", Integer.toString(this.page));
         parameters.put("limit", Integer.toString(this.limit));
 		

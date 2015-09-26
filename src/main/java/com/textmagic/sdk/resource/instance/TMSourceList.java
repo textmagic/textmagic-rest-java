@@ -1,5 +1,6 @@
 package com.textmagic.sdk.resource.instance;
 
+import com.textmagic.sdk.ClientException;
 import com.textmagic.sdk.RestClient;
 import com.textmagic.sdk.RestException;
 import com.textmagic.sdk.RestResponse;
@@ -43,10 +44,11 @@ public class TMSourceList<T extends Resource, C extends RestClient> extends Reso
      * Retrieve dedicated numbers
      *
      * @return Dedicated numbers
-     * @throws RestException exception
+     * @throws RestException exception when TextMagic REST API returns an error
+	 * @throws ClientException when error occurs on client side
      */
     @SuppressWarnings("unchecked")
-	public List<String> getDedicatedNumbers() throws RestException {
+	public List<String> getDedicatedNumbers() throws RestException, ClientException {
         RestResponse response = getClient().request(getResourcePath(), GET, parameters);
         Map<String, Object> sources = new HashMap<String, Object>(response.toMap());
 
@@ -57,10 +59,11 @@ public class TMSourceList<T extends Resource, C extends RestClient> extends Reso
      * Retrieve user phones
      *
      * @return User phones
-     * @throws RestException exception
+     * @throws RestException exception when TextMagic REST API returns an error
+	 * @throws ClientException when error occurs on client side
      */
     @SuppressWarnings("unchecked")
-	public List<String> getUserPhones() throws RestException {
+	public List<String> getUserPhones() throws RestException, ClientException {
         RestResponse response = getClient().request(getResourcePath(), GET, parameters);
         Map<String, Object> sources = new HashMap<String, Object>(response.toMap());
 
@@ -71,10 +74,11 @@ public class TMSourceList<T extends Resource, C extends RestClient> extends Reso
      * Retrieve shared numbers
      *
      * @return Shared numbers
-     * @throws RestException exception
+     * @throws RestException exception when TextMagic REST API returns an error
+	 * @throws ClientException when error occurs on client side
      */
     @SuppressWarnings("unchecked")
-	public List<String> getSharedNumbers() throws RestException {
+	public List<String> getSharedNumbers() throws RestException, ClientException {
         RestResponse response = getClient().request(getResourcePath(), GET, parameters);
         Map<String, Object> sources = new HashMap<String, Object>(response.toMap());
 
@@ -85,10 +89,11 @@ public class TMSourceList<T extends Resource, C extends RestClient> extends Reso
      * Retrieve numbers
      *
      * @return numbers
-     * @throws RestException exception
+     * @throws RestException exception when TextMagic REST API returns an error
+	 * @throws ClientException when error occurs on client side
      */
     @SuppressWarnings("unchecked")
-	public List<String> getSenderIds() throws RestException {
+	public List<String> getSenderIds() throws RestException, ClientException {
         RestResponse response = getClient().request(getResourcePath(), GET, parameters);
         Map<String, Object> sources = new HashMap<String, Object>(response.toMap());
 

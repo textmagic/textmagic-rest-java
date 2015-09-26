@@ -1,5 +1,6 @@
 package com.textmagic.sdk.resource.instance;
 
+import com.textmagic.sdk.ClientException;
 import com.textmagic.sdk.RestClient;
 import com.textmagic.sdk.RestException;
 import com.textmagic.sdk.RestResponse;
@@ -48,9 +49,10 @@ public class TMNewMessage extends Resource<RestClient> {
 	 * Send new message
 	 *
      * @return Error state
-	 * @throws RestException exception
+	 * @throws RestException exception when TextMagic REST API returns an error
+	 * @throws ClientException when error occurs on client side
 	 */
-	public boolean send() throws RestException {
+	public boolean send() throws RestException, ClientException {
         properties.put("dummy", false);
 		RestResponse response = getClient().request(getResourcePath(), POST, buildRequestParameters(properties));
         this.properties = new HashMap<String, Object>(response.toMap());
@@ -61,9 +63,10 @@ public class TMNewMessage extends Resource<RestClient> {
 	 * Get message price
 	 *
 	 * @return Message price
-	 * @throws RestException exception
+	 * @throws RestException exception when TextMagic REST API returns an error
+	 * @throws ClientException when error occurs on client side
 	 */
-	public Double getPrice() throws RestException {
+	public Double getPrice() throws RestException, ClientException {
         properties.put("dummy", true);
 		RestResponse response = getClient().request(getResourcePath(), POST, buildRequestParameters(properties));
 		Map<String, Object> result = new HashMap<String, Object>(response.toMap());

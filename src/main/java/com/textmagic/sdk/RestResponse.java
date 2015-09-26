@@ -70,6 +70,7 @@ public class RestResponse {
 	 * Retrieve map container from JSON response
 	 *
 	 * @return Map container with repeated elements as List values, sub-objects as Map values. All other types are String values.
+	 * @throws ClientException when parsing API response fails
 	 */
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> toMap() throws ClientException {
@@ -92,6 +93,7 @@ public class RestResponse {
 	 * Retrieve list container from JSON response
 	 *
 	 * @return List container with repeated elements as list values.
+	 * @throws ClientException when parsing API response fails
 	 */
     @SuppressWarnings("unchecked")
 	public List<Object> toList() throws ClientException {
