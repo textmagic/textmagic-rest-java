@@ -133,25 +133,25 @@ public class RestClient {
 	 *
 	 * @param clazz Class to instantiate
 	 * @return Resource object
-	 * @throws RuntimeException exception when class instance can not be created
+	 * @throws ClientException exception when class instance can not be created
 	 */
-	public <T extends Resource<RestClient>> T getResource(Class<T> clazz) throws RuntimeException {
+	public <T extends Resource<RestClient>> T getResource(Class<T> clazz) throws ClientException {
 		try {
 			return clazz
 				.getConstructor(RestClient.class)
 				.newInstance(this);
 		} catch (final InstantiationException e) {
-			throw new RuntimeException(e);
+			throw new ClientException(e);
 		} catch (final IllegalAccessException e) {
-			throw new RuntimeException(e);
+			throw new ClientException(e);
 		} catch (final IllegalArgumentException e) {
-			throw new RuntimeException(e);
+			throw new ClientException(e);
 		} catch (final InvocationTargetException e) {
-			throw new RuntimeException(e);
+			throw new ClientException(e);
 		} catch (final NoSuchMethodException e) {
-			throw new RuntimeException(e);
+			throw new ClientException(e);
 		} catch (final SecurityException e) {
-			throw new RuntimeException(e);
+			throw new ClientException(e);
 		}
 	}
 	
@@ -161,25 +161,25 @@ public class RestClient {
 	 * @param clazz Class to instantiate
 	 * @param parameters Parameters
 	 * @return Resource object
-	 * @throws RuntimeException exception when class instance can not be created
+	 * @throws ClientException exception when class instance can not be created
 	 */
-	public <T extends Resource<RestClient>> T getResource(Class<T> clazz, Map<String, String> parameters) throws RuntimeException {
+	public <T extends Resource<RestClient>> T getResource(Class<T> clazz, Map<String, String> parameters) throws ClientException {
 		try {
 			return clazz
 				.getConstructor(RestClient.class, Map.class)
 				.newInstance(this, parameters);
 		} catch (final InstantiationException e) {
-			throw new RuntimeException(e);
+			throw new ClientException(e);
 		} catch (final IllegalAccessException e) {
-			throw new RuntimeException(e);
+			throw new ClientException(e);
 		} catch (final IllegalArgumentException e) {
-			throw new RuntimeException(e);
+			throw new ClientException(e);
 		} catch (final InvocationTargetException e) {
-			throw new RuntimeException(e);
+			throw new ClientException(e);
 		} catch (final NoSuchMethodException e) {
-			throw new RuntimeException(e);
+			throw new ClientException(e);
 		} catch (final SecurityException e) {
-			throw new RuntimeException(e);
+			throw new ClientException(e);
 		}
 	}
 	
@@ -261,7 +261,7 @@ public class RestClient {
 		try {
 			entity = new UrlEncodedFormEntity(paramList, "UTF-8");
 		} catch (final UnsupportedEncodingException e) {
-			throw new RuntimeException(e);
+			throw new ClientException(e);
 		}
 
 		return entity;
@@ -343,9 +343,9 @@ public class RestClient {
 	 * @param paramList Request params
 	 * @return Textmagic response instance
      * @throws RestException exception when API request results in error (HTTP error codes in 3xx or 4xx)
-     * @throws RuntimeException exception when network or protocol error is encountered
+     * @throws ClientException exception when network or protocol error is encountered
 	 */
-	public RestResponse request(final String path, final RequestMethod method, final List<NameValuePair> paramList) throws RestException, RuntimeException {
+	public RestResponse request(final String path, final RequestMethod method, final List<NameValuePair> paramList) throws RestException, ClientException {
 		if (path == null && method == null && paramList == null) {
 			return new RestResponse("", 0);
 		}
@@ -382,9 +382,9 @@ public class RestClient {
 			
 			throw RestException.parseResponse(result);
 		} catch (final ClientProtocolException e1) {
-			throw new RuntimeException(e1);
+			throw new ClientException(e1);
 		} catch (final IOException e1) {
-			throw new RuntimeException(e1);
+			throw new ClientException(e1);
 		}
 	}
 

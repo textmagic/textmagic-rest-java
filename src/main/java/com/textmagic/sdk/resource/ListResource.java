@@ -1,5 +1,6 @@
 package com.textmagic.sdk.resource;
 
+import com.textmagic.sdk.ClientException;
 import com.textmagic.sdk.RestClient;
 import com.textmagic.sdk.RestException;
 import com.textmagic.sdk.RestResponse;
@@ -36,7 +37,7 @@ public abstract class ListResource<T extends Resource, C extends RestClient> ext
 			try {
 				fetchNextPage();
 			} catch (RestException e) {
-				throw new RuntimeException(e);
+				throw new ClientException(e);
 			}
 
 			itr = pageData.iterator();
@@ -95,7 +96,7 @@ public abstract class ListResource<T extends Resource, C extends RestClient> ext
 		try {
 			return new ListIterator(getPageData().iterator());
 		} catch (RestException e) {
-			throw new RuntimeException(e);
+			throw new ClientException(e);
 		}
 	}
 
