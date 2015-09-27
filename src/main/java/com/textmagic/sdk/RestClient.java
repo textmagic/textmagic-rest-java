@@ -50,7 +50,7 @@ public class RestClient {
 	/**
 	 * URI for TextMagic API production endpoint
 	 */
-	public static final String PRODUCTION_URI = "https://api.textmagic.com/api/" + VERSION;
+	public static final String PRODUCTION_URI = "https://rest.textmagic.com/api/" + VERSION;
 
     /**
      * Username
