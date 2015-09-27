@@ -52,11 +52,6 @@ public class RestClient {
 	 */
 	public static final String PRODUCTION_URI = "https://api.textmagic.com/api/" + VERSION;
 
-	/**
-	 * URI for TextMagic API testing endpoint
-	 */
-	public static final String TESTING_URI = "https://api.textmagictesting.com/api/" + VERSION;
-
     /**
      * Username
      */
@@ -111,6 +106,19 @@ public class RestClient {
 
     /**
 	 * Instantiates REST client
+	 *
+	 * @param username API username
+	 * @param token API token
+	 * @param uri URI to the desired TextMagic endpoint
+	 */
+	public RestClient(final String username, final String token) {
+		this(username, token, PRODUCTION_URI);
+	}
+
+    /**
+	 * Instantiates REST client. This constructor allows to specify API URI for
+	 * accessing non-standard endpoints (e.g. mocked endpoint in a network where
+	 * internet is not accesible.
 	 *
 	 * @param username API username
 	 * @param token API token

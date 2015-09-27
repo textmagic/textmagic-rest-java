@@ -54,7 +54,7 @@ public class BasicTest {
 	final String username = "<USERNAME>";
 	final String token = "<APIV2_TOKEN>";
 
-	protected RestClient client = spy(new RestClient(username, token, RestClient.TESTING_URI));
+	protected RestClient client = spy(new RestClient(username, token));
 
 	
 	@Before

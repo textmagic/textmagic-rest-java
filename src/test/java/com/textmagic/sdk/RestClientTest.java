@@ -20,14 +20,15 @@ public class RestClientTest extends BasicTest {
 
 	@Test
 	public void testEndpointSelectionTest() {
-		client = new RestClient("user", "token", RestClient.TESTING_URI);
-		assertTrue(client.getApiUri().startsWith("https://api.textmagictesting.com"));
+		client = new RestClient("user", "token");
+		assertTrue(client.getApiUri().startsWith(RestClient.PRODUCTION_URI));
 	}
 
 	@Test
 	public void testEndpointSelectionProduction() {
-		client = new RestClient("user", "token", RestClient.PRODUCTION_URI);
-		assertTrue(client.getApiUri().startsWith("https://api.textmagic.com"));
+		String testURI = "https://api.test.api/";
+		client = new RestClient("user", "token", "https://api.test.api/");
+		assertEquals(testURI, client.getApiUri());
 	}
 
 	@Test
