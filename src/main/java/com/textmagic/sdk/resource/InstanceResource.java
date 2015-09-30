@@ -14,6 +14,7 @@ import static com.textmagic.sdk.RequestMethod.POST;
 import static com.textmagic.sdk.RequestMethod.PUT;
 
 import java.text.ParseException;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -84,8 +85,16 @@ public abstract class InstanceResource<C extends RestClient> extends Resource<C>
 	 */
 	protected void setProperty(String name, Object value) {
 		properties.put(name, value);
-	}    
-    
+	}
+
+	/**
+	 * Get immutable representation of properties
+	 * @return
+	 */
+	protected Map<String, Object> getProperties() {
+		return Collections.unmodifiableMap(properties);
+	}
+
 	/**
 	 * Retrieve resource date property
      *
@@ -176,5 +185,18 @@ public abstract class InstanceResource<C extends RestClient> extends Resource<C>
             
             return !response.isError();
 		}
+	}
+
+	/**
+	 * Objects are equal if property Maps are equal
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof InstanceResource) {
+			@SuppressWarnings("unchecked")
+			InstanceResource<RestClient> other = (InstanceResource<RestClient>) obj;
+			return getProperties().equals(other.getProperties());
+		}
+		return super.equals(obj);
 	}
 }
