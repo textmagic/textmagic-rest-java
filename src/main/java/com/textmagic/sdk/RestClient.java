@@ -52,6 +52,8 @@ public class RestClient {
 	 */
 	public static final String PRODUCTION_URI = "https://rest.textmagic.com/api/" + VERSION;
 
+	private static final int TIMEOUT = 1000;
+
     /**
      * Username
      */
@@ -363,9 +365,9 @@ public class RestClient {
 		HttpResponse response;
 		try {
 	        long requestTimeDiff = new java.util.Date().getTime() - previousRequestTime;
-			if (requestTimeDiff < 500) {
+			if (requestTimeDiff < TIMEOUT) {
 	            try {
-					Thread.sleep(500 - requestTimeDiff);
+					Thread.sleep(TIMEOUT - requestTimeDiff);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
