@@ -35,7 +35,7 @@ public class TMNewMessage extends Resource<RestClient> {
         this.properties = new HashMap<String, Object>();
         this.requestFields = new HashSet<String>(
         	Arrays.asList(
-        		new String[] {"text", "templateId", "sendingTime", "contacts", "lists", "phones", "cutExtra", "partsCount", "referenceId", "from", "rrule", "dummy"}
+        		new String[] {"text", "templateId", "sendingTime", "contacts", "lists", "phones", "cutExtra", "partsCount", "referenceId", "from", "rrule"}
         	)
         );
     }
@@ -53,7 +53,6 @@ public class TMNewMessage extends Resource<RestClient> {
 	 * @throws ClientException when error occurs on client side
 	 */
 	public boolean send() throws RestException, ClientException {
-        properties.put("dummy", false);
 		RestResponse response = getClient().request(getResourcePath(), POST, buildRequestParameters(properties));
         this.properties = new HashMap<String, Object>(response.toMap());
         return !response.isError();
@@ -67,7 +66,6 @@ public class TMNewMessage extends Resource<RestClient> {
 	 * @throws ClientException when error occurs on client side
 	 */
 	public Double getPrice() throws RestException, ClientException {
-        properties.put("dummy", true);
 		RestResponse response = getClient().request(getResourcePath(), POST, buildRequestParameters(properties));
 		Map<String, Object> result = new HashMap<String, Object>(response.toMap());
 		return (Double) result.get("total");
