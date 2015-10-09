@@ -7,6 +7,7 @@ import com.textmagic.sdk.RestResponse;
 import com.textmagic.sdk.resource.Resource;
 
 import static com.textmagic.sdk.RequestMethod.POST;
+import static com.textmagic.sdk.RequestMethod.GET;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,6 +46,10 @@ public class TMNewMessage extends Resource<RestClient> {
         return "messages";
     }
 
+    protected String getPriceResourcePath() {
+        return "messages/price";
+    }
+
 	/**
 	 * Send new message
 	 *
@@ -66,9 +71,14 @@ public class TMNewMessage extends Resource<RestClient> {
 	 * @throws ClientException when error occurs on client side
 	 */
 	public Double getPrice() throws RestException, ClientException {
-		RestResponse response = getClient().request(getResourcePath(), POST, buildRequestParameters(properties));
+		RestResponse response = getClient().request(getPriceResourcePath(), GET, buildRequestParameters(properties));
 		Map<String, Object> result = new HashMap<String, Object>(response.toMap());
-		return (Double) result.get("total");
+		// Return correct type even if object is unmarshalled to Integer
+		Object total = result.get("total");
+		if (total instanceof Integer) {
+			return ((Integer) total).doubleValue();
+		}
+		return (Double) total;
 	}
 	
 	/**
@@ -134,7 +144,7 @@ public class TMNewMessage extends Resource<RestClient> {
      */
     public void setSendingTime(Date sendingTime) {
         long timestamp = (sendingTime.getTime() / 1000);
-    	setProperty("sendingTime", timestamp);
+        setProperty("sendingTime", String.valueOf(timestamp));
     }
     
     /**
