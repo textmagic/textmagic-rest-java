@@ -72,7 +72,7 @@ public class RestClient {
 	 * @return API URI
 	 */
 	public String getApiUri() {
-		return "https://api.textmagictesting.com/api/" + version;
+		return "https://rest.textmagic.com/api/" + version;
 	}
     
 	/**
