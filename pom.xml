@@ -4,7 +4,7 @@
   <artifactId>textmagic-java-sdk</artifactId>
   <packaging>jar</packaging>
   <name>textmagic-java-sdk</name>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <description>Java wrapper library for Textmagic services</description>
   <url>http://www.textmagic.com</url>
   <licenses>
