@@ -40,8 +40,9 @@ public class Example{
 
 ## Installation Instructions
 ### Quick Installation
-```
+
 The easiest way to install the TextMagic Java wrapper is from Maven. You can add the following dependency to your existing project, specifying the latest version in the version tag:
+```
 <dependency>
     <groupid>com.textmagic.sdk</groupid>
     <artifactid>textmagic-java-sdk</artifactid>
@@ -49,8 +50,9 @@ The easiest way to install the TextMagic Java wrapper is from Maven. You can add
 </dependency>
 ```
 ### Manual Installation
-```
+
 You can also install the TextMagic Java wrapper from the GitHub repository using git. Run the following commands:
+```
 git clone git://github.com/textmagic/textmagic-rest-java.git
 cd textmagic-rest-java
 mvn install
