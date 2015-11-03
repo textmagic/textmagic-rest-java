@@ -96,7 +96,10 @@ public class TMSubaccount extends TMUser {
     }
     
     /**
-     * Set role
+     * Set role:<ul>
+     * <li>A for administrator
+     * <li>U for regular user
+     * </ul>
      *
      * @param role Role
      */
