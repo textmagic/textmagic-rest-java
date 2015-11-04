@@ -533,8 +533,7 @@ public class RestClientTest extends BasicTest {
 		Map<String, String> parametersPost = new HashMap<String, String>();
 		parametersPost.put("text", "TEST");
 		parametersPost.put("phones", "1234567890");
-		parametersPost.put("dummy", "1");
-		setMockResponse(POST, "messages", parametersPost, "messagePrice.json", 201);
+		setMockResponse(GET, "messages/price", parametersPost, "messagePrice.json", 201);
 		TMNewMessage m = client.getResource(TMNewMessage.class);
 		m.setText("TEST");
 		m.setPhones(Arrays.asList(new String[] {"1234567890"}));
@@ -551,7 +550,6 @@ public class RestClientTest extends BasicTest {
 		Map<String, String> parametersPost = new HashMap<String, String>();
 		parametersPost.put("text", "TEST");
 		parametersPost.put("phones", "1234567890");
-		parametersPost.put("dummy", "0");
 		setMockResponse(POST, "messages", parametersPost, "messageSend.json", 201);
 		TMNewMessage m = client.getResource(TMNewMessage.class);
 		m.setText("TEST");
