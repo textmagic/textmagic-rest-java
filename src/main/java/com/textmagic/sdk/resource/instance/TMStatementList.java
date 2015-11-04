@@ -1,9 +1,12 @@
 package com.textmagic.sdk.resource.instance;
 
+import com.textmagic.sdk.ClientException;
 import com.textmagic.sdk.RestClient;
 import com.textmagic.sdk.RestException;
 import com.textmagic.sdk.RestResponse;
 import com.textmagic.sdk.resource.ListResource;
+
+import static com.textmagic.sdk.RequestMethod.GET;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,11 +35,11 @@ public class TMStatementList extends ListResource<TMStatement, RestClient> {
 
     @Override
     @SuppressWarnings("unchecked")
-	protected void getListContent() throws RestException {
+	protected void getListContent() throws RestException, ClientException {
 		parameters.put("page", Integer.toString(this.page));
         parameters.put("limit", Integer.toString(this.limit));
 
-        RestResponse response = getClient().request(getResourcePath(), "GET", parameters);
+        RestResponse response = getClient().request(getResourcePath(), GET, parameters);
         Map<String, Object> data = response.toMap();
 		page = getIntValue(data.get("page"));
 		limit = getIntValue(data.get("limit"));

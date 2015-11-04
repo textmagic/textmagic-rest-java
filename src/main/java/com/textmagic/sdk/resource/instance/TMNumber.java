@@ -1,5 +1,6 @@
 package com.textmagic.sdk.resource.instance;
 
+import com.textmagic.sdk.ClientException;
 import com.textmagic.sdk.RestClient;
 import com.textmagic.sdk.RestException;
 import com.textmagic.sdk.RestResponse;
@@ -8,6 +9,10 @@ import com.textmagic.sdk.resource.InstanceResource;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.HashMap;
+
+import static com.textmagic.sdk.RequestMethod.GET;
+import static com.textmagic.sdk.RequestMethod.POST;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +58,7 @@ public class TMNumber extends InstanceResource<RestClient> {
     @Override
 	public boolean createOrUpdate() throws RestException {
 		if (getProperty("id") == null) {
-            RestResponse response = getClient().request(getResourcePath(), "POST", buildRequestParameters(properties));
+            RestResponse response = getClient().request(getResourcePath(), POST, buildRequestParameters(properties));
             Map<String, Object> properties = response.toMap();
             Integer id = (Integer) properties.get("id");
             clearProperties();
@@ -69,14 +74,15 @@ public class TMNumber extends InstanceResource<RestClient> {
      * @param country Country
      * @param prefix Prefix
      * @return Available numbers
-     * @throws RestException exception
+     * @throws RestException exception when TextMagic REST API returns an error
+	 * @throws ClientException when error occurs on client side
      */
     @SuppressWarnings("unchecked")
-	public List<String> getAvailableNumbers(String country, String prefix) throws RestException {
+	public List<String> getAvailableNumbers(String country, String prefix) throws RestException, ClientException {
         Map<String, String> params = new HashMap<String, String>();
         params.put("country", country);
         params.put("prefix", prefix);
-        RestResponse response = getClient().request(getResourcePath() + "/available", "GET", params);
+        RestResponse response = getClient().request(getResourcePath() + "/available", GET, params);
         Map<String, Object> available = new HashMap<String, Object>(response.toMap());
 
     	return (List<String>) available.get("numbers");

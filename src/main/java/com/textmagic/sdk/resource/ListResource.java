@@ -1,8 +1,11 @@
 package com.textmagic.sdk.resource;
 
+import com.textmagic.sdk.ClientException;
 import com.textmagic.sdk.RestClient;
 import com.textmagic.sdk.RestException;
 import com.textmagic.sdk.RestResponse;
+
+import static com.textmagic.sdk.RequestMethod.GET;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,7 +37,7 @@ public abstract class ListResource<T extends Resource, C extends RestClient> ext
 			try {
 				fetchNextPage();
 			} catch (RestException e) {
-				throw new RuntimeException(e);
+				throw new ClientException(e);
 			}
 
 			itr = pageData.iterator();
@@ -93,7 +96,7 @@ public abstract class ListResource<T extends Resource, C extends RestClient> ext
 		try {
 			return new ListIterator(getPageData().iterator());
 		} catch (RestException e) {
-			throw new RuntimeException(e);
+			throw new ClientException(e);
 		}
 	}
 
@@ -112,7 +115,7 @@ public abstract class ListResource<T extends Resource, C extends RestClient> ext
 	 * @throws RestException exception
 	 */
     @SuppressWarnings("unchecked")
-	protected void getListContent() throws RestException {
+	protected void getListContent() throws RestException, ClientException {
 		parameters.put("page", Integer.toString(this.page));
         parameters.put("limit", Integer.toString(this.limit));
 		
@@ -122,7 +125,7 @@ public abstract class ListResource<T extends Resource, C extends RestClient> ext
 			sb.append("/search");
 		}
 
-        RestResponse response = getClient().request(sb.toString(), "GET", parameters);
+        RestResponse response = getClient().request(sb.toString(), GET, parameters);
         Map<String, Object> data = response.toMap();
 		page = getIntValue(data.get("page"));
 		limit = getIntValue(data.get("limit"));

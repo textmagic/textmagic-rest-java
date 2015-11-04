@@ -6,6 +6,9 @@ import com.textmagic.sdk.RestResponse;
 import com.textmagic.sdk.resource.InstanceResource;
 
 import java.util.HashSet;
+
+import static com.textmagic.sdk.RequestMethod.POST;
+
 import java.util.Arrays;
 import java.util.Map;
 
@@ -50,7 +53,7 @@ public class TMSenderId extends InstanceResource<RestClient> {
     @Override
 	public boolean createOrUpdate() throws RestException {
 		if (getProperty("id") == null) {
-            RestResponse response = getClient().request(getResourcePath(), "POST", buildRequestParameters(properties));
+            RestResponse response = getClient().request(getResourcePath(), POST, buildRequestParameters(properties));
             Map<String, Object> properties = response.toMap();
             Integer id = (Integer) properties.get("id");
             clearProperties();

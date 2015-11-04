@@ -1,12 +1,20 @@
 package com.textmagic.sdk.resource;
 
+import com.textmagic.sdk.ClientException;
+import com.textmagic.sdk.RequestMethod;
 import com.textmagic.sdk.RestClient;
 import com.textmagic.sdk.RestException;
 import com.textmagic.sdk.RestResponse;
 import org.apache.commons.lang.time.DateUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 
+import static com.textmagic.sdk.RequestMethod.DELETE;
+import static com.textmagic.sdk.RequestMethod.GET;
+import static com.textmagic.sdk.RequestMethod.POST;
+import static com.textmagic.sdk.RequestMethod.PUT;
+
 import java.text.ParseException;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -77,8 +85,16 @@ public abstract class InstanceResource<C extends RestClient> extends Resource<C>
 	 */
 	protected void setProperty(String name, Object value) {
 		properties.put(name, value);
-	}    
-    
+	}
+
+	/**
+	 * Get immutable representation of properties
+	 * @return
+	 */
+	protected Map<String, Object> getProperties() {
+		return Collections.unmodifiableMap(properties);
+	}
+
 	/**
 	 * Retrieve resource date property
      *
@@ -113,11 +129,12 @@ public abstract class InstanceResource<C extends RestClient> extends Resource<C>
 	 *
 	 * @param id Resource item id
 	 * @return Error state
-	 * @throws RestException exception
+	 * @throws RestException exception when TextMagic REST API returns an error
+	 * @throws ClientException when error occurs on client side
 	 */
-	public boolean get(Integer id) throws RestException {
+	public boolean get(Integer id) throws RestException, ClientException {
 		if (properties.size() == 0) {
-            RestResponse response = getClient().request(getResourcePath() + '/' + id, "GET");
+            RestResponse response = getClient().request(getResourcePath() + '/' + id, GET);
             this.properties = new HashMap<String, Object>(response.toMap());
             
             return !response.isError();
@@ -130,17 +147,18 @@ public abstract class InstanceResource<C extends RestClient> extends Resource<C>
 	 * Create or update resource item
      *
      * @return Error state
-	 * @throws RestException exception
+	 * @throws RestException exception when TextMagic REST API returns an error
+	 * @throws ClientException when error occurs on client side
 	 */
-	public boolean createOrUpdate() throws RestException {
+	public boolean createOrUpdate() throws RestException, ClientException {
 		String resourcePath = null;
-		String method = null;
+		RequestMethod method = null;
 		
 		if (getProperty("id") == null) {
-			method = "POST";
+			method = POST;
 			resourcePath = getResourcePath();
 		} else {
-			method = "PUT";
+			method = PUT;
 			resourcePath = getResourcePath() + '/' + getProperty("id");
 		}
 		
@@ -155,16 +173,30 @@ public abstract class InstanceResource<C extends RestClient> extends Resource<C>
 	 * Delete resource item
      *
      * @return Error state
-	 * @throws RestException exception
+	 * @throws RestException exception when TextMagic REST API returns an error
+	 * @throws ClientException when error occurs on client side
 	 */
-	public boolean delete() throws RestException {
+	public boolean delete() throws RestException, ClientException {
 		if (getProperty("id") == null) {
 			throw new UnsupportedOperationException("This operation is unsupported for non existent objects");
 		} else {
-			RestResponse response = getClient().request(getResourcePath() + '/' + getProperty("id"), "DELETE");
+			RestResponse response = getClient().request(getResourcePath() + '/' + getProperty("id"), DELETE);
             clearProperties();
             
             return !response.isError();
 		}
+	}
+
+	/**
+	 * Objects are equal if property Maps are equal
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof InstanceResource) {
+			@SuppressWarnings("unchecked")
+			InstanceResource<RestClient> other = (InstanceResource<RestClient>) obj;
+			return getProperties().equals(other.getProperties());
+		}
+		return super.equals(obj);
 	}
 }
