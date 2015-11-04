@@ -52,7 +52,7 @@ public class RestClient {
 	 */
 	public static final String PRODUCTION_URI = "https://rest.textmagic.com/api/" + VERSION;
 
-	private static final int TIMEOUT = 1000;
+	private static final int TIMEOUT = 500;
 
     /**
      * Username
