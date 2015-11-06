@@ -89,7 +89,7 @@ public abstract class InstanceResource<C extends RestClient> extends Resource<C>
 
 	/**
 	 * Get immutable representation of properties
-	 * @return
+	 * @return Properties collection
 	 */
 	protected Map<String, Object> getProperties() {
 		return Collections.unmodifiableMap(properties);

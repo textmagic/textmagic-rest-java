@@ -111,7 +111,6 @@ public class RestClient {
 	 *
 	 * @param username API username
 	 * @param token API token
-	 * @param uri URI to the desired TextMagic endpoint
 	 */
 	public RestClient(final String username, final String token) {
 		this(username, token, PRODUCTION_URI);

@@ -162,7 +162,7 @@ public class RestException extends Exception {
 	 * <li> Error code returned by server<br>
 	 * <li> Error message<br>
 	 * <li> Error list
-	 * </ol
+	 * </ol>
 	 * @return textual representation of Exception data
 	 */
 	public String getTextRepresentation() {
