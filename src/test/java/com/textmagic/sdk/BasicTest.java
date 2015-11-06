@@ -62,7 +62,7 @@ public class BasicTest {
 		MockitoAnnotations.initMocks(this);
 	}
 
-	protected void setMockResponse(final String method, final String url, final Map<String, String> params, String resourceName, Integer status) throws Exception {
+	protected void setMockResponse(final RequestMethod method, final String url, final Map<String, String> params, String resourceName, Integer status) throws Exception {
 		String response = null;
 		if (resourceName != null) {
 			response = IOUtils.toString(BasicTest.class.getResourceAsStream(resourceName), "UTF-8");

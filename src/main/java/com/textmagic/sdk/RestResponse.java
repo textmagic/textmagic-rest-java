@@ -70,19 +70,20 @@ public class RestResponse {
 	 * Retrieve map container from JSON response
 	 *
 	 * @return Map container with repeated elements as List values, sub-objects as Map values. All other types are String values.
+	 * @throws ClientException when parsing API response fails
 	 */
 	@SuppressWarnings("unchecked")
-	public Map<String, Object> toMap() {
+	public Map<String, Object> toMap() throws ClientException {
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		try {
 			result = new ObjectMapper().readValue(jsonResponse, HashMap.class);
 		} catch (JsonParseException e) {
-			e.printStackTrace();
+			throw new ClientException(e);
 		} catch (JsonMappingException e) {
-			e.printStackTrace();
+			throw new ClientException(e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new ClientException(e);
 		}
 
 		return result;
@@ -92,19 +93,20 @@ public class RestResponse {
 	 * Retrieve list container from JSON response
 	 *
 	 * @return List container with repeated elements as list values.
+	 * @throws ClientException when parsing API response fails
 	 */
     @SuppressWarnings("unchecked")
-	public List<Object> toList() {
+	public List<Object> toList() throws ClientException {
 		List<Object> result = new ArrayList<Object>();
 
 		try {
 			result = new ObjectMapper().readValue(jsonResponse, List.class);
 		} catch (JsonParseException e) {
-			e.printStackTrace();
+			throw new ClientException(e);
 		} catch (JsonMappingException e) {
-			e.printStackTrace();
+			throw new ClientException(e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new ClientException(e);
 		}
 
 		return result;

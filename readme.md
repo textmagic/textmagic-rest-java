@@ -23,8 +23,8 @@ import java.util.Arrays;
 public class Example{
   public static void main(String[] args) throws RestException {
     RestClient client = new RestClient("<USERNAME>", "<APIV2_TOKEN>");
-          
-    TMNewMessage m = (TMNewMessage) client.getResource("TMNewMessage");
+
+    TMNewMessage m = client.getResource(TMNewMessage.class);
     m.setText("Hello from TextMagic Java");
     m.setPhones(Arrays.asList(new String[] {"99900000"}));
     try {
@@ -46,7 +46,7 @@ The easiest way to install the TextMagic Java wrapper is from Maven. You can add
 <dependency>
     <groupid>com.textmagic.sdk</groupid>
     <artifactid>textmagic-java-sdk</artifactid>
-    <version>1.0.0</version>
+    <version>1.2.0</version>
 </dependency>
 ```
 ### Manual Installation

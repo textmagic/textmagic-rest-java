@@ -19,6 +19,8 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import com.textmagic.sdk.resource.Resource;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
@@ -40,11 +42,17 @@ class HttpDeleteEntity extends HttpPost {
 }
 
 public class RestClient {
-
-    /**
+	/**
      * Used version
      */
-	private static final String version = "v2";
+	private static final String VERSION = "v2";
+
+	/**
+	 * URI for TextMagic API production endpoint
+	 */
+	public static final String PRODUCTION_URI = "https://rest.textmagic.com/api/" + VERSION;
+
+	private static final int TIMEOUT = 500;
 
     /**
      * Username
@@ -56,6 +64,11 @@ public class RestClient {
      */
 	private final String token;
 
+	/**
+	 * URI for TextMagic REST API
+	 */
+	private final String uri;
+
     /**
      * Http client instance
      */
@@ -65,14 +78,14 @@ public class RestClient {
      * Previous request time for prevent limit exceed error
      */    
     protected long previousRequestTime = 0;	
-	
+
 	/**
 	 * Retrieve API URI
 	 *
 	 * @return API URI
 	 */
 	public String getApiUri() {
-		return "https://rest.textmagic.com/api/" + version;
+		return uri;
 	}
     
 	/**
@@ -92,16 +105,31 @@ public class RestClient {
 	public void setHttpClient(final HttpClient client) {
 		this.client = client;
 	}
-    
+
     /**
 	 * Instantiates REST client
 	 *
 	 * @param username API username
 	 * @param token API token
+	 * @param uri URI to the desired TextMagic endpoint
 	 */
 	public RestClient(final String username, final String token) {
+		this(username, token, PRODUCTION_URI);
+	}
+
+    /**
+	 * Instantiates REST client. This constructor allows to specify API URI for
+	 * accessing non-standard endpoints (e.g. mocked endpoint in a network where
+	 * internet is not accesible.
+	 *
+	 * @param username API username
+	 * @param token API token
+	 * @param uri URI to the desired TextMagic endpoint
+	 */
+	public RestClient(final String username, final String token, final String uri) {
 		this.username = username;
 		this.token = token;
+		this.uri = uri;
 
 		setHttpClient(new DefaultHttpClient());
 		client.getParams().setParameter("http.protocol.version", HttpVersion.HTTP_1_1);
@@ -113,65 +141,57 @@ public class RestClient {
 	/**
 	 * Retrieve resource object
 	 *
-	 * @param name Name
+	 * @param clazz Class to instantiate
 	 * @return Resource object
+	 * @throws ClientException exception when class instance can not be created
 	 */
-	public Object getResource(String name) {
-		Object resource = null;
+	public <T extends Resource<RestClient>> T getResource(Class<T> clazz) throws ClientException {
 		try {
-			resource = Class.forName("com.textmagic.sdk.resource.instance." + name)
+			return clazz
 				.getConstructor(RestClient.class)
 				.newInstance(this);
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+		} catch (final InstantiationException e) {
+			throw new ClientException(e);
+		} catch (final IllegalAccessException e) {
+			throw new ClientException(e);
+		} catch (final IllegalArgumentException e) {
+			throw new ClientException(e);
+		} catch (final InvocationTargetException e) {
+			throw new ClientException(e);
+		} catch (final NoSuchMethodException e) {
+			throw new ClientException(e);
+		} catch (final SecurityException e) {
+			throw new ClientException(e);
 		}
-		
-		return resource;
-	}	
+	}
 	
 	/**
 	 * Retrieve resource object
 	 *
-	 * @param name Name
+	 * @param clazz Class to instantiate
 	 * @param parameters Parameters
 	 * @return Resource object
+	 * @throws ClientException exception when class instance can not be created
 	 */
-	public Object getResource(String name, Map<String, String> parameters) {
-		Object resource = null;
+	public <T extends Resource<RestClient>> T getResource(Class<T> clazz, Map<String, String> parameters) throws ClientException {
 		try {
-			resource = Class.forName("com.textmagic.sdk.resource.instance." + name)
+			return clazz
 				.getConstructor(RestClient.class, Map.class)
 				.newInstance(this, parameters);
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+		} catch (final InstantiationException e) {
+			throw new ClientException(e);
+		} catch (final IllegalAccessException e) {
+			throw new ClientException(e);
+		} catch (final IllegalArgumentException e) {
+			throw new ClientException(e);
+		} catch (final InvocationTargetException e) {
+			throw new ClientException(e);
+		} catch (final NoSuchMethodException e) {
+			throw new ClientException(e);
+		} catch (final SecurityException e) {
+			throw new ClientException(e);
 		}
-		
-		return resource;
-	}		
+	}
 	
 	/**
 	 * Build get request
@@ -251,7 +271,7 @@ public class RestClient {
 		try {
 			entity = new UrlEncodedFormEntity(paramList, "UTF-8");
 		} catch (final UnsupportedEncodingException e) {
-			throw new RuntimeException(e);
+			throw new ClientException(e);
 		}
 
 		return entity;
@@ -319,7 +339,7 @@ public class RestClient {
 	 * @return Textmagic response instance
      * @throws RestException exception
 	 */
-	public RestResponse request(final String path, final String method) throws RestException {
+	public RestResponse request(final String path, final RequestMethod method) throws RestException {
 		Map<String, String> param = new HashMap<String, String>();
 		
 		return request(path, method, param);
@@ -332,9 +352,10 @@ public class RestClient {
 	 * @param method Request method
 	 * @param paramList Request params
 	 * @return Textmagic response instance
-     * @throws RestException exception
+     * @throws RestException exception when API request results in error (HTTP error codes in 3xx or 4xx)
+     * @throws ClientException exception when network or protocol error is encountered
 	 */
-	public RestResponse request(final String path, final String method, final List<NameValuePair> paramList) throws RestException {
+	public RestResponse request(final String path, final RequestMethod method, final List<NameValuePair> paramList) throws RestException, ClientException {
 		if (path == null && method == null && paramList == null) {
 			return new RestResponse("", 0);
 		}
@@ -344,9 +365,9 @@ public class RestClient {
 		HttpResponse response;
 		try {
 	        long requestTimeDiff = new java.util.Date().getTime() - previousRequestTime;
-			if (requestTimeDiff < 500) {
+			if (requestTimeDiff < TIMEOUT) {
 	            try {
-					Thread.sleep(500 - requestTimeDiff);
+					Thread.sleep(TIMEOUT - requestTimeDiff);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -371,9 +392,9 @@ public class RestClient {
 			
 			throw RestException.parseResponse(result);
 		} catch (final ClientProtocolException e1) {
-			throw new RuntimeException(e1);
+			throw new ClientException(e1);
 		} catch (final IOException e1) {
-			throw new RuntimeException(e1);
+			throw new ClientException(e1);
 		}
 	}
 
@@ -386,7 +407,7 @@ public class RestClient {
 	 * @return Textmagic response instance
      * @throws RestException exception
 	 */
-	public RestResponse request(final String path, final String method, final Map<String, String> paramMap) throws RestException {
+	public RestResponse request(final String path, final RequestMethod method, final Map<String, String> paramMap) throws RestException {
 		List<NameValuePair> paramList = buildParametersList(paramMap);
         
 		return request(path, method, paramList);
@@ -400,7 +421,7 @@ public class RestClient {
 	 * @param params Request params
 	 * @return HTTP request instance
 	 */
-	private HttpUriRequest buildRequest(final String method, String path, final List<NameValuePair> params) {
+	private HttpUriRequest buildRequest(final RequestMethod method, String path, final List<NameValuePair> params) {
 		String normalizedPath = path.toLowerCase();
 		StringBuilder sb = new StringBuilder();
 
@@ -413,20 +434,25 @@ public class RestClient {
 		path = sb.toString();
 
 		HttpUriRequest request;
-        
-        if (method.equalsIgnoreCase("GET")) {
+
+		switch(method) {
+		case GET:
 			request = buildGetRequest(path, params);
-		} else if (method.equalsIgnoreCase("POST")) {
+			break;
+		case POST:
 			request = buildPostRequest(path, params);
-		} else if (method.equalsIgnoreCase("PUT")) {
+			break;
+		case PUT:
 			request = buildPutRequest(path, params);
-		} else if (method.equalsIgnoreCase("DELETE")) {
+			break;
+		case DELETE:
 			request = buildDeleteRequest(path, params);
-		} else {
+			break;
+		default:
 			throw new IllegalArgumentException("Unknown Method: " + method);
 		}
 
-		request.addHeader(new BasicHeader("User-Agent", "textmagic-rest-java/" + version));
+		request.addHeader(new BasicHeader("User-Agent", "textmagic-rest-java/" + VERSION));
 		request.addHeader(new BasicHeader("Accept", "application/json"));
 		request.addHeader(new BasicHeader("Accept-Charset", "utf-8"));
 		request.addHeader(new BasicHeader("Accept-Language", "en-US"));

@@ -1,9 +1,13 @@
 package com.textmagic.sdk.resource.instance;
 
+import com.textmagic.sdk.ClientException;
 import com.textmagic.sdk.RestClient;
 import com.textmagic.sdk.RestException;
 import com.textmagic.sdk.RestResponse;
 import com.textmagic.sdk.resource.Resource;
+
+import static com.textmagic.sdk.RequestMethod.POST;
+import static com.textmagic.sdk.RequestMethod.GET;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,6 +16,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
 
 public class TMNewMessage extends Resource<RestClient> {
 
@@ -30,7 +36,7 @@ public class TMNewMessage extends Resource<RestClient> {
         this.properties = new HashMap<String, Object>();
         this.requestFields = new HashSet<String>(
         	Arrays.asList(
-        		new String[] {"text", "templateId", "sendingTime", "contacts", "lists", "phones", "cutExtra", "partsCount", "referenceId", "from", "rrule", "dummy"}
+        		new String[] {"text", "templateId", "sendingTime", "contacts", "lists", "phones", "cutExtra", "partsCount", "referenceId", "from", "rrule"}
         	)
         );
     }
@@ -40,15 +46,19 @@ public class TMNewMessage extends Resource<RestClient> {
         return "messages";
     }
 
+    protected String getPriceResourcePath() {
+        return "messages/price";
+    }
+
 	/**
 	 * Send new message
 	 *
      * @return Error state
-	 * @throws RestException exception
+	 * @throws RestException exception when TextMagic REST API returns an error
+	 * @throws ClientException when error occurs on client side
 	 */
-	public boolean send() throws RestException {
-        properties.put("dummy", false);
-		RestResponse response = getClient().request(getResourcePath(), "POST", buildRequestParameters(properties));
+	public boolean send() throws RestException, ClientException {
+		RestResponse response = getClient().request(getResourcePath(), POST, buildRequestParameters(properties));
         this.properties = new HashMap<String, Object>(response.toMap());
         return !response.isError();
 	}
@@ -57,13 +67,18 @@ public class TMNewMessage extends Resource<RestClient> {
 	 * Get message price
 	 *
 	 * @return Message price
-	 * @throws RestException exception
+	 * @throws RestException exception when TextMagic REST API returns an error
+	 * @throws ClientException when error occurs on client side
 	 */
-	public Double getPrice() throws RestException {
-        properties.put("dummy", true);
-		RestResponse response = getClient().request(getResourcePath(), "POST", buildRequestParameters(properties));
+	public Double getPrice() throws RestException, ClientException {
+		RestResponse response = getClient().request(getPriceResourcePath(), GET, buildRequestParameters(properties));
 		Map<String, Object> result = new HashMap<String, Object>(response.toMap());
-		return (Double) result.get("total");
+		// Return correct type even if object is unmarshalled to Integer
+		Object total = result.get("total");
+		if (total instanceof Integer) {
+			return ((Integer) total).doubleValue();
+		}
+		return (Double) total;
 	}
 	
 	/**
@@ -129,7 +144,7 @@ public class TMNewMessage extends Resource<RestClient> {
      */
     public void setSendingTime(Date sendingTime) {
         long timestamp = (sendingTime.getTime() / 1000);
-    	setProperty("sendingTime", timestamp);
+        setProperty("sendingTime", String.valueOf(timestamp));
     }
     
     /**
@@ -143,7 +158,7 @@ public class TMNewMessage extends Resource<RestClient> {
 			param.add(Integer.toString(id));
 		}
     	
-    	setProperty("contacts", String.join(",", param));
+    	setProperty("contacts", StringUtils.join(param, ","));
     }
     
     /**
@@ -157,7 +172,7 @@ public class TMNewMessage extends Resource<RestClient> {
 			param.add(Integer.toString(id));
 		}
     	
-    	setProperty("lists", String.join(",", param));
+    	setProperty("lists", StringUtils.join(param, ","));
     }
     
     /**
@@ -166,7 +181,7 @@ public class TMNewMessage extends Resource<RestClient> {
      * @param phones Phones
      */
     public void setPhones(final List<String> phones) {
-        setProperty("phones", String.join(",", phones));
+        setProperty("phones", StringUtils.join(phones, ","));
     }
     
     /**
