@@ -1,6 +1,6 @@
 ## Synopsis
 
-The TextMagic API Java wrapper can save you a lot of time, as it includes all the necessary API commands and tests. It only takes a few seconds to download it from GitHub and to install it into your own app or software. After installation, you’ll then be able to send text messages.
+The TextMagic API Java wrapper can save you a lot of time, as it includes all the necessary API commands and tests. It only takes a few seconds to download it from GitHub and to install it into your own app or software. After installation, youâ€™ll then be able to send text messages.
 
 <!---
 sms api for JAVA
@@ -44,8 +44,8 @@ public class Example{
 The easiest way to install the TextMagic Java wrapper is from Maven. You can add the following dependency to your existing project, specifying the latest version in the version tag:
 ```
 <dependency>
-    <groupid>com.textmagic.sdk</groupid>
-    <artifactid>textmagic-java-sdk</artifactid>
+    <groupId>com.textmagic.sdk</groupId>
+    <artifactId>textmagic-java-sdk</artifactId>
     <version>1.2.0</version>
 </dependency>
 ```
